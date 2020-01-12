@@ -1,0 +1,87 @@
+﻿#region Copyright & License
+
+// Copyright © 2012 - 2021 François Chabot
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#endregion
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
+using System.Xml.Serialization;
+
+namespace Be.Stateless.Xml.Serialization.Extensions
+{
+	/// <summary>
+	/// <see cref="XmlAttributeOverrides"/>'s typed-extension methods.
+	/// </summary>
+	/// <seealso href="http://stackoverflow.com/questions/9377414/excluding-some-properties-during-serialization-without-changing-the-original-cla"/>
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
+	public static class XmlAttributeOverridesExtensions
+	{
+		public static void Add<T>(this XmlAttributeOverrides overrides, XmlAttributes attributes)
+		{
+			if (overrides == null) throw new ArgumentNullException(nameof(overrides));
+			overrides.Add(typeof(T), attributes);
+		}
+
+		public static void Add<T>(this XmlAttributeOverrides overrides, Expression<Func<T, object>> propertySelector, XmlAttributes attributes)
+		{
+			if (overrides == null) throw new ArgumentNullException(nameof(overrides));
+			if (propertySelector == null) throw new ArgumentNullException(nameof(propertySelector));
+			overrides.Add(typeof(T), propertySelector.GetPropertyName(), attributes);
+		}
+
+		public static void Ignore<T>(this XmlAttributeOverrides overrides, Expression<Func<T, object>> propertySelector)
+		{
+			if (overrides == null) throw new ArgumentNullException(nameof(overrides));
+			if (propertySelector == null) throw new ArgumentNullException(nameof(propertySelector));
+			overrides.Add(typeof(T), propertySelector.GetPropertyName(), _ignore);
+		}
+
+		[SuppressMessage("ReSharper", "SwitchStatementHandlesSomeKnownEnumValuesWithDefault")]
+		private static string GetPropertyName(this Expression propertySelector)
+		{
+			while (true)
+			{
+				switch (propertySelector.NodeType)
+				{
+					case ExpressionType.Lambda:
+						var lambdaExpression = (LambdaExpression) propertySelector;
+						propertySelector = lambdaExpression.Body;
+						continue; // tail recursion
+
+					case ExpressionType.Convert:
+					case ExpressionType.Quote:
+						var unaryExpression = (UnaryExpression) propertySelector;
+						propertySelector = unaryExpression.Operand;
+						continue; // tail recursion
+
+					case ExpressionType.MemberAccess:
+						var memberExpression = (MemberExpression) propertySelector;
+						var propertyInfo = memberExpression.Member;
+						if (memberExpression.Expression is ParameterExpression) return propertyInfo.Name;
+						// we've got a nested property (e.g. MyType.SomeProperty.SomeNestedProperty)
+						return GetPropertyName(memberExpression.Expression) + "." + propertyInfo.Name;
+
+					default:
+						throw new ArgumentException($"Cannot translate expression because '{propertySelector}' is not a member expression.");
+				}
+			}
+		}
+
+		private static readonly XmlAttributes _ignore = new() { XmlIgnore = true };
+	}
+}
