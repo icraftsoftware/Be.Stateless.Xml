@@ -22,6 +22,7 @@ namespace Be.Stateless.Xml.Builder
 	{
 		string LocalName { get; }
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings")]
 		string NamespaceUri { get; }
 
 		string Prefix { get; }

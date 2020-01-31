@@ -24,6 +24,7 @@ namespace Be.Stateless.Xml.Builder
 
 		public string LocalName => string.Empty;
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings")]
 		public string NamespaceUri => string.Empty;
 
 		public string Prefix => string.Empty;

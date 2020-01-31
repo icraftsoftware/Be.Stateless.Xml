@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 using Be.Stateless.Linq.Extensions;
 using Be.Stateless.Reflection;
@@ -27,6 +28,8 @@ namespace Be.Stateless.Xml.Xsl
 	/// <summary>
 	/// Cloneable <see cref="System.Xml.Xsl.XsltArgumentList"/>.
 	/// </summary>
+	[SuppressMessage("Design", "CA1010:Collections should implement generic interface")]
+	[SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix")]
 	public class XsltArgumentList : System.Xml.Xsl.XsltArgumentList, ICloneable, IEnumerable
 	{
 		private static void Copy(System.Xml.Xsl.XsltArgumentList source, System.Xml.Xsl.XsltArgumentList target)

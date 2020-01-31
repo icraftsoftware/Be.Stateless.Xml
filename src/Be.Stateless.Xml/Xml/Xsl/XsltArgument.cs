@@ -22,6 +22,7 @@ namespace Be.Stateless.Xml.Xsl
 	{
 		public XsltArgument(string name, object value) : this(name, string.Empty, value) { }
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1054:Uri parameters should not be strings")]
 		public XsltArgument(string name, string namespaceUri, object value)
 		{
 			Name = name;
@@ -31,6 +32,7 @@ namespace Be.Stateless.Xml.Xsl
 
 		public string Name { get; private set; }
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings")]
 		public string NamespaceUri { get; private set; }
 
 		public object Value { get; private set; }

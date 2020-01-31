@@ -35,6 +35,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// </param>
 		public static void AssertStartElement(this XmlReader reader, string name)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			if (reader.IsStartElement(name)) return;
 			var info = (IXmlLineInfo) reader;
 			throw new XmlException($"Element '{name}' was not found. Line {info.LineNumber}, position {info.LinePosition}.");
