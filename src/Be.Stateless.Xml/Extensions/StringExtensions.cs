@@ -72,7 +72,6 @@ namespace Be.Stateless.Extensions
 				localPart = match.Groups["localPart"].Value;
 				return true;
 			}
-
 			prefix = localPart = null;
 			return false;
 		}
@@ -93,6 +92,8 @@ namespace Be.Stateless.Extensions
 		/// </returns>
 		public static XmlQualifiedName ToQName(this string qName, IXmlNamespaceResolver namespaceResolver)
 		{
+			if (qName.IsNullOrEmpty()) throw new ArgumentNullException(nameof(qName));
+			if (namespaceResolver == null) throw new ArgumentNullException(nameof(namespaceResolver));
 			var success = TryParseQName(qName, out var prefix, out var localPart);
 			if (!success) throw new ArgumentException($"'{qName}' is not a valid XML qualified name.", nameof(qName));
 			var ns = namespaceResolver.LookupNamespace(prefix);

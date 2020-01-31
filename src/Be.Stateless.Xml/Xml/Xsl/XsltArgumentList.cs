@@ -25,7 +25,7 @@ using Be.Stateless.Reflection;
 namespace Be.Stateless.Xml.Xsl
 {
 	/// <summary>
-	/// Cloneable <see cref="T:System.Xml.Xsl.XsltArgumentList"/>.
+	/// Cloneable <see cref="System.Xml.Xsl.XsltArgumentList"/>.
 	/// </summary>
 	public class XsltArgumentList : System.Xml.Xsl.XsltArgumentList, ICloneable, IEnumerable
 	{
@@ -137,6 +137,7 @@ namespace Be.Stateless.Xml.Xsl
 
 		public System.Xml.Xsl.XsltArgumentList Add(XsltArgument argument)
 		{
+			if (argument == null) throw new ArgumentNullException(nameof(argument));
 			AddParam(argument.Name, argument.NamespaceUri, argument.Value);
 			return this;
 		}

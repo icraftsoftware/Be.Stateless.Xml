@@ -25,6 +25,8 @@ namespace Be.Stateless.Xml.Extensions
 	{
 		public static XmlWriterSettings Override(this XmlWriterSettings settings, Action<XmlWriterSettings> overrider)
 		{
+			if (settings == null) throw new ArgumentNullException(nameof(settings));
+			if (overrider == null) throw new ArgumentNullException(nameof(overrider));
 			var overriddenSettings = settings.Clone();
 			overrider(overriddenSettings);
 			return overriddenSettings;

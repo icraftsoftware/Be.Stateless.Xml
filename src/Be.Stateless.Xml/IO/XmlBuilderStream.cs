@@ -36,7 +36,7 @@ namespace Be.Stateless.IO
 		[SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global")]
 		public XmlBuilderStream(IXmlElementBuilder node, Encoding encoding)
 		{
-			_encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
+			Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
 			_disposable = node as IDisposable;
 			var enumerable = node == null
 				? Enumerable.Empty<IXmlElementBuilder>()
@@ -64,7 +64,7 @@ namespace Be.Stateless.IO
 			throw new NotSupportedException();
 		}
 
-		public override long Length => throw new NotImplementedException();
+		public override long Length => throw new NotSupportedException();
 
 		public override long Position
 		{
@@ -82,7 +82,6 @@ namespace Be.Stateless.IO
 				// append to buffer and keep any overflowing content
 				_backlog = bufferController.Append(ReadNextNode(), Encoding);
 			}
-
 			_position += bufferController.Count;
 			return bufferController.Count;
 		}
@@ -104,7 +103,7 @@ namespace Be.Stateless.IO
 
 		#endregion
 
-		public Encoding Encoding => _encoding;
+		public Encoding Encoding { get; private set; }
 
 		public bool EOF => _enumerators.Count == 0;
 
@@ -187,7 +186,6 @@ namespace Be.Stateless.IO
 		}
 
 		private readonly IDisposable _disposable;
-		private readonly Encoding _encoding;
 		private readonly LinkedList<ConservativeEnumerator> _enumerators;
 		private byte[] _backlog;
 		private int _position;

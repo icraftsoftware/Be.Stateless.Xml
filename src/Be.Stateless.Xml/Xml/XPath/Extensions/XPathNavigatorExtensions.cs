@@ -16,6 +16,7 @@
 
 #endregion
 
+using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
@@ -28,11 +29,13 @@ namespace Be.Stateless.Xml.XPath.Extensions
 	{
 		public static Stream AsStream(this XPathNavigator navigator)
 		{
+			if (navigator == null) throw new ArgumentNullException(nameof(navigator));
 			return new StringStream(navigator.OuterXml);
 		}
 
 		public static XmlNamespaceManager GetNamespaceManager(this XPathNavigator navigator)
 		{
+			if (navigator == null) throw new ArgumentNullException(nameof(navigator));
 			var namespaceManager = new XmlNamespaceManager(navigator.NameTable);
 			namespaceManager.AddNamespace("xs", XmlSchema.Namespace);
 			namespaceManager.AddNamespace("xsi", XmlSchema.InstanceNamespace);

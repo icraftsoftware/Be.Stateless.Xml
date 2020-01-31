@@ -56,6 +56,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// </param>
 		public static void AssertStartElement(this XmlReader reader, string name, string ns)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			if (reader.IsStartElement(name, ns)) return;
 			var info = (IXmlLineInfo) reader;
 			throw new XmlException($"Element '{name}' with namespace name '{ns}' was not found. Line {info.LineNumber}, position {info.LinePosition}.");
@@ -73,6 +74,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// </param>
 		public static void AssertEndElement(this XmlReader reader, string name)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			if (reader.IsEndElement(name)) return;
 			var info = (IXmlLineInfo) reader;
 			throw new XmlException($"End element '{name}' was not found. Line {info.LineNumber}, position {info.LinePosition}.");
@@ -94,6 +96,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// </param>
 		public static void AssertEndElement(this XmlReader reader, string name, string ns)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			if (reader.IsEndElement(name, ns)) return;
 			var info = (IXmlLineInfo) reader;
 			throw new XmlException($"End element '{name}' with namespace name '{ns}' was not found. Line {info.LineNumber}, position {info.LinePosition}.");
@@ -111,6 +114,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// </param>
 		public static bool IsEndElement(this XmlReader reader, string name)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			return reader.NodeType == XmlNodeType.EndElement && reader.Name == name;
 		}
 
@@ -130,6 +134,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// </param>
 		public static bool IsEndElement(this XmlReader reader, string name, string ns)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			return reader.NodeType == XmlNodeType.EndElement && reader.LocalName == name && reader.NamespaceURI == ns;
 		}
 
@@ -154,6 +159,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// </exception>
 		public static string GetMandatoryAttribute(this XmlReader reader, string name)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			if (reader.MoveToAttribute(name)) return reader.Value;
 			var info = (IXmlLineInfo) reader;
 			throw new XmlException($"Attribute '{name}' was not found. Line {info.LineNumber}, position {info.LinePosition}.");
@@ -161,6 +167,7 @@ namespace Be.Stateless.Xml.Extensions
 
 		public static bool HasAttribute(this XmlReader reader, string name)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			return reader.MoveToAttribute(name);
 		}
 
@@ -176,6 +183,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// </param>
 		public static void ReadEndElement(this XmlReader reader, string name)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			reader.AssertEndElement(name);
 			reader.ReadEndElement();
 		}
@@ -195,6 +203,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// </param>
 		public static void ReadEndElement(this XmlReader reader, string name, string ns)
 		{
+			if (reader == null) throw new ArgumentNullException(nameof(reader));
 			reader.AssertEndElement(name, ns);
 			reader.ReadEndElement();
 		}

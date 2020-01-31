@@ -117,7 +117,6 @@ namespace Be.Stateless.Xml
 				if (contentProcessing == XmlSchemaContentProcessing.Strict) readerSettings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
 				readerSettings.ValidationType = ValidationType.Schema;
 			}
-
 			return readerSettings;
 		}
 	}

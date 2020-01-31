@@ -30,16 +30,21 @@ namespace Be.Stateless.Xml.Serialization.Extensions
 	{
 		public static void Add<T>(this XmlAttributeOverrides overrides, XmlAttributes attributes)
 		{
+			if (overrides == null) throw new ArgumentNullException(nameof(overrides));
 			overrides.Add(typeof(T), attributes);
 		}
 
 		public static void Add<T>(this XmlAttributeOverrides overrides, Expression<Func<T, object>> propertySelector, XmlAttributes attributes)
 		{
+			if (overrides == null) throw new ArgumentNullException(nameof(overrides));
+			if (propertySelector == null) throw new ArgumentNullException(nameof(propertySelector));
 			overrides.Add(typeof(T), propertySelector.GetPropertyName(), attributes);
 		}
 
 		public static void Ignore<T>(this XmlAttributeOverrides overrides, Expression<Func<T, object>> propertySelector)
 		{
+			if (overrides == null) throw new ArgumentNullException(nameof(overrides));
+			if (propertySelector == null) throw new ArgumentNullException(nameof(propertySelector));
 			overrides.Add(typeof(T), propertySelector.GetPropertyName(), _ignore);
 		}
 

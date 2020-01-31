@@ -36,6 +36,7 @@ namespace Be.Stateless.Xml.Extensions
 
 		public static XmlNamespaceManager GetNamespaceManager(this XmlDocument document)
 		{
+			if (document == null) throw new ArgumentNullException(nameof(document));
 			var namespaceManager = new XmlNamespaceManager(document.NameTable);
 			namespaceManager.AddNamespace("xs", XmlSchema.Namespace);
 			namespaceManager.AddNamespace("xsi", XmlSchema.InstanceNamespace);

@@ -16,6 +16,7 @@
 
 #endregion
 
+using System;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -38,6 +39,7 @@ namespace Be.Stateless.Text.Extensions
 		/// </returns>
 		public static XmlReader GetReaderAtContent(this StringBuilder builder)
 		{
+			if (builder == null) throw new ArgumentNullException(nameof(builder));
 			var xmlReader = builder.ToString().Trim()
 					.IfNotNullOrEmpty(s => XmlReader.Create(new StringReader(s), new XmlReaderSettings { CloseInput = true }))
 				?? EmptyXmlReader.Create();
