@@ -29,6 +29,95 @@ namespace Be.Stateless.Xml
 	/// </summary>
 	public static class ValidatingXmlReaderSettings
 	{
+		public static XmlReaderSettings Create<T>(XmlSchemaContentProcessing contentProcessing = XmlSchemaContentProcessing.Strict) where T : XmlSchema, new()
+		{
+			return Create(contentProcessing, new T());
+		}
+
+		public static XmlReaderSettings Create<T1, T2>(XmlSchemaContentProcessing contentProcessing = XmlSchemaContentProcessing.Strict)
+			where T1 : XmlSchema, new()
+			where T2 : XmlSchema, new()
+		{
+			return Create(contentProcessing, new T1(), new T2());
+		}
+
+		public static XmlReaderSettings Create<T1, T2, T3>(XmlSchemaContentProcessing contentProcessing = XmlSchemaContentProcessing.Strict)
+			where T1 : XmlSchema, new()
+			where T2 : XmlSchema, new()
+			where T3 : XmlSchema, new()
+		{
+			return Create(contentProcessing, new T1(), new T2(), new T3());
+		}
+
+		public static XmlReaderSettings Create<T1, T2, T3, T4>(XmlSchemaContentProcessing contentProcessing = XmlSchemaContentProcessing.Strict)
+			where T1 : XmlSchema, new()
+			where T2 : XmlSchema, new()
+			where T3 : XmlSchema, new()
+			where T4 : XmlSchema, new()
+		{
+			return Create(contentProcessing, new T1(), new T2(), new T3(), new T4());
+		}
+
+		public static XmlReaderSettings Create<T1, T2, T3, T4, T5>(XmlSchemaContentProcessing contentProcessing = XmlSchemaContentProcessing.Strict)
+			where T1 : XmlSchema, new()
+			where T2 : XmlSchema, new()
+			where T3 : XmlSchema, new()
+			where T4 : XmlSchema, new()
+			where T5 : XmlSchema, new()
+		{
+			return Create(contentProcessing, new T1(), new T2(), new T3(), new T4(), new T5());
+		}
+
+		public static XmlReaderSettings Create<T1, T2, T3, T4, T5, T6>(XmlSchemaContentProcessing contentProcessing = XmlSchemaContentProcessing.Strict)
+			where T1 : XmlSchema, new()
+			where T2 : XmlSchema, new()
+			where T3 : XmlSchema, new()
+			where T4 : XmlSchema, new()
+			where T5 : XmlSchema, new()
+			where T6 : XmlSchema, new()
+		{
+			return Create(contentProcessing, new T1(), new T2(), new T3(), new T4(), new T5(), new T6());
+		}
+
+		public static XmlReaderSettings Create<T1, T2, T3, T4, T5, T6, T7>(XmlSchemaContentProcessing contentProcessing = XmlSchemaContentProcessing.Strict)
+			where T1 : XmlSchema, new()
+			where T2 : XmlSchema, new()
+			where T3 : XmlSchema, new()
+			where T4 : XmlSchema, new()
+			where T5 : XmlSchema, new()
+			where T6 : XmlSchema, new()
+			where T7 : XmlSchema, new()
+		{
+			return Create(contentProcessing, new T1(), new T2(), new T3(), new T4(), new T5(), new T6(), new T7());
+		}
+
+		public static XmlReaderSettings Create<T1, T2, T3, T4, T5, T6, T7, T8>(XmlSchemaContentProcessing contentProcessing = XmlSchemaContentProcessing.Strict)
+			where T1 : XmlSchema, new()
+			where T2 : XmlSchema, new()
+			where T3 : XmlSchema, new()
+			where T4 : XmlSchema, new()
+			where T5 : XmlSchema, new()
+			where T6 : XmlSchema, new()
+			where T7 : XmlSchema, new()
+			where T8 : XmlSchema, new()
+		{
+			return Create(contentProcessing, new T1(), new T2(), new T3(), new T4(), new T5(), new T6(), new T7(), new T8());
+		}
+
+		public static XmlReaderSettings Create<T1, T2, T3, T4, T5, T6, T7, T8, T9>(XmlSchemaContentProcessing contentProcessing = XmlSchemaContentProcessing.Strict)
+			where T1 : XmlSchema, new()
+			where T2 : XmlSchema, new()
+			where T3 : XmlSchema, new()
+			where T4 : XmlSchema, new()
+			where T5 : XmlSchema, new()
+			where T6 : XmlSchema, new()
+			where T7 : XmlSchema, new()
+			where T8 : XmlSchema, new()
+			where T9 : XmlSchema, new()
+		{
+			return Create(contentProcessing, new T1(), new T2(), new T3(), new T4(), new T5(), new T6(), new T7(), new T8(), new T9());
+		}
+
 		/// <summary>
 		/// Specifies a set of <see cref="XmlReaderSettings"/> features to support XSD validation on the <see cref="XmlReader"/>
 		/// object created by the <see cref="XmlReader.Create(XmlReader,XmlReaderSettings)"/> method or one of its other
