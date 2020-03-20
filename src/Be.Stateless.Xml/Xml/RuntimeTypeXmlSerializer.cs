@@ -36,9 +36,9 @@ namespace Be.Stateless.Xml
 		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
 		public static implicit operator Type(RuntimeTypeXmlSerializer serializer)
 		{
-			return serializer is null || serializer._assemblyQualifiedName.IsNullOrEmpty()
+			return serializer is null || serializer._serializedRuntimeType.IsNullOrEmpty()
 				? null
-				: Type.GetType(serializer._assemblyQualifiedName, true);
+				: Type.GetType(serializer._serializedRuntimeType, true);
 		}
 
 		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
@@ -51,9 +51,9 @@ namespace Be.Stateless.Xml
 
 		public RuntimeTypeXmlSerializer() { }
 
-		private RuntimeTypeXmlSerializer(string assemblyQualifiedName)
+		private RuntimeTypeXmlSerializer(string serializedRuntimeType)
 		{
-			_assemblyQualifiedName = assemblyQualifiedName;
+			_serializedRuntimeType = serializedRuntimeType;
 		}
 
 		#region IXmlSerializable Members
@@ -66,17 +66,17 @@ namespace Be.Stateless.Xml
 		public void ReadXml(XmlReader reader)
 		{
 			if (reader == null) throw new ArgumentNullException(nameof(reader));
-			_assemblyQualifiedName = reader.ReadElementContentAsString();
+			_serializedRuntimeType = reader.ReadElementContentAsString();
 		}
 
 		public void WriteXml(XmlWriter writer)
 		{
 			if (writer == null) throw new ArgumentNullException(nameof(writer));
-			writer.WriteString(_assemblyQualifiedName);
+			writer.WriteString(_serializedRuntimeType);
 		}
 
 		#endregion
 
-		private string _assemblyQualifiedName;
+		private string _serializedRuntimeType;
 	}
 }

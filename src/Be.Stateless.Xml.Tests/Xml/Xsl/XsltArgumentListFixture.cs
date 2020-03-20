@@ -29,20 +29,6 @@ namespace Be.Stateless.Xml.Xsl
 {
 	public class XsltArgumentListFixture
 	{
-		public XsltArgumentListFixture()
-		{
-			_extensions = new Dictionary<string, object> {
-				{ "urn:extensions:one", new object() },
-				{ "urn:extensions:two", new object() },
-				{ "urn:extensions:ten", new object() }
-			};
-			_params = new Dictionary<XmlQualifiedName, object> {
-				{ new XmlQualifiedName("p1", "urn:parameters"), new object() },
-				{ new XmlQualifiedName("p2", "urn:parameters"), new object() },
-				{ new XmlQualifiedName("p3", "urn:parameters"), new object() }
-			};
-		}
-
 		[Fact]
 		public void Clone()
 		{
@@ -145,6 +131,20 @@ namespace Be.Stateless.Xml.Xsl
 
 			union.Should().NotBeSameAs(lhs);
 			union.Should().NotBeSameAs(rhs);
+		}
+
+		public XsltArgumentListFixture()
+		{
+			_extensions = new Dictionary<string, object> {
+				{ "urn:extensions:one", new object() },
+				{ "urn:extensions:two", new object() },
+				{ "urn:extensions:ten", new object() }
+			};
+			_params = new Dictionary<XmlQualifiedName, object> {
+				{ new XmlQualifiedName("p1", "urn:parameters"), new object() },
+				{ new XmlQualifiedName("p2", "urn:parameters"), new object() },
+				{ new XmlQualifiedName("p3", "urn:parameters"), new object() }
+			};
 		}
 
 		private readonly Dictionary<string, object> _extensions;

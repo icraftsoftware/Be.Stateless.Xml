@@ -49,19 +49,6 @@ namespace Be.Stateless.Xml
 		}
 
 		[Fact]
-		public void SerializeType()
-		{
-			var builder = new StringBuilder();
-			using (var writer = XmlWriter.Create(builder, new XmlWriterSettings { OmitXmlDeclaration = true }))
-			{
-				var sut = (RuntimeTypeXmlSerializer) typeof(int);
-				var serializer = new XmlSerializer(typeof(RuntimeTypeXmlSerializer));
-				serializer.Serialize(writer, sut);
-			}
-			builder.ToString().Should().Be($"<RuntimeTypeXmlSerializer>{typeof(int).AssemblyQualifiedName}</RuntimeTypeXmlSerializer>");
-		}
-
-		[Fact]
 		public void SerializeNullType()
 		{
 			var builder = new StringBuilder();
@@ -72,6 +59,19 @@ namespace Be.Stateless.Xml
 				serializer.Serialize(writer, sut);
 			}
 			builder.ToString().Should().Be("<RuntimeTypeXmlSerializer />");
+		}
+
+		[Fact]
+		public void SerializeType()
+		{
+			var builder = new StringBuilder();
+			using (var writer = XmlWriter.Create(builder, new XmlWriterSettings { OmitXmlDeclaration = true }))
+			{
+				var sut = (RuntimeTypeXmlSerializer) typeof(int);
+				var serializer = new XmlSerializer(typeof(RuntimeTypeXmlSerializer));
+				serializer.Serialize(writer, sut);
+			}
+			builder.ToString().Should().Be($"<RuntimeTypeXmlSerializer>{typeof(int).AssemblyQualifiedName}</RuntimeTypeXmlSerializer>");
 		}
 	}
 }

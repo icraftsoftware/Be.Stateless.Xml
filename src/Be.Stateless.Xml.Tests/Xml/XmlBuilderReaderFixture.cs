@@ -33,17 +33,6 @@ namespace Be.Stateless.Xml
 {
 	public class XmlBuilderReaderFixture
 	{
-		public XmlBuilderReaderFixture()
-		{
-			IdentityTransform = new XslCompiledTransform(true);
-			using (var xmlReader = XmlReader.Create(ResourceManager.Load(Assembly.GetExecutingAssembly(), "Be.Stateless.Xml.Xsl.XsltIdentity.xslt")))
-			{
-				IdentityTransform.Load(xmlReader);
-			}
-		}
-
-		private XslCompiledTransform IdentityTransform { get; }
-
 		[Fact]
 		public void DisposeIXmlElementBuilder()
 		{
@@ -80,6 +69,17 @@ namespace Be.Stateless.Xml
 			AssertTransformResult(new XmlBuilderReader(builder), expected.IsNullOrEmpty() ? EmptyXmlReader.Create() : XmlReader.Create(new StringReader(expected)));
 			AssertTransformInvocations(new XmlBuilderReader(builder), expected.IsNullOrEmpty() ? EmptyXmlReader.Create() : XmlReader.Create(new StringReader(expected)));
 		}
+
+		public XmlBuilderReaderFixture()
+		{
+			IdentityTransform = new XslCompiledTransform(true);
+			using (var xmlReader = XmlReader.Create(ResourceManager.Load(Assembly.GetExecutingAssembly(), "Be.Stateless.Xml.Xsl.XsltIdentity.xslt")))
+			{
+				IdentityTransform.Load(xmlReader);
+			}
+		}
+
+		private XslCompiledTransform IdentityTransform { get; }
 
 		private void AssertOuterXmlConformance(XmlReader actual, XmlReader expected)
 		{
