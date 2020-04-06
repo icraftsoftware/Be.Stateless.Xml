@@ -75,7 +75,9 @@ namespace Be.Stateless.Extensions
 			"tp:MessagingStepActivityID".ToQName(navigator).Should()
 				.Be(new XmlQualifiedName("MessagingStepActivityID", "urn:schemas.stateless.be:biztalk:properties:tracking:2012:04"));
 			Action act = () => ":MessagingStepActivityID".ToQName(navigator);
-			act.Should().Throw<ArgumentException>().WithMessage("':MessagingStepActivityID' is not a valid XML qualified name.\r\nParameter name: qName");
+			act.Should().Throw<ArgumentException>()
+				.WithMessage("':MessagingStepActivityID' is not a valid XML qualified name.*")
+				.Where(e => e.ParamName == "qName");
 		}
 
 		[Theory]
