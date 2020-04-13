@@ -169,7 +169,6 @@ namespace Be.Stateless.Xml.Xsl
 					namespaceUri: (string) splatteredArguments[i + 1],
 					parameter: splatteredArguments[i + 2]);
 			}
-
 			return union;
 		}
 

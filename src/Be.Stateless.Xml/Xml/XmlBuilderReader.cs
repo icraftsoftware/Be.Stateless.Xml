@@ -295,7 +295,6 @@ namespace Be.Stateless.Xml
 				_nodeType = XmlNodeType.Element;
 				return true;
 			}
-
 			return false;
 		}
 
@@ -331,18 +330,15 @@ namespace Be.Stateless.Xml
 			{
 				_enumerators.RemoveLast();
 			}
-
 			if (CurrentNode is IXmlElementBuilder && CurrentNode.HasAttributes())
 			{
 				_enumerators.AddLast(CurrentNode.GetAttributes().GetConservativeEnumerator());
 			}
-
 			if (CurrentEnumerator is IEnumerator<IXmlAttributeBuilder> && CurrentEnumerator.MoveNext())
 			{
 				_nodeType = XmlNodeType.Attribute;
 				return true;
 			}
-
 			return false;
 		}
 
@@ -449,7 +445,6 @@ namespace Be.Stateless.Xml
 				_nodeType = XmlNodeType.Text;
 				return true;
 			}
-
 			_enumerators.RemoveLast();
 			return false;
 		}

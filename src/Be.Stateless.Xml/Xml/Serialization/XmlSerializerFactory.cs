@@ -49,7 +49,6 @@ namespace Be.Stateless.Xml.Serialization
 					}
 				}
 			}
-
 			return serializer;
 		}
 

@@ -147,7 +147,6 @@ namespace Be.Stateless.IO
 						_enumerators.AddLast(CurrentNode.GetChildNodes().GetConservativeEnumerator());
 						return result;
 					}
-
 					return CurrentNode.Prefix.IsNullOrEmpty()
 						? $"<{CurrentNode.LocalName} />"
 						: $"<{CurrentNode.Prefix}:{CurrentNode.LocalName} />";
@@ -169,7 +168,6 @@ namespace Be.Stateless.IO
 					_enumerators.AddLast(CurrentNode.GetChildNodes().GetConservativeEnumerator());
 					return ">";
 				}
-
 				return " />";
 			}
 
@@ -181,7 +179,6 @@ namespace Be.Stateless.IO
 					? $"</{CurrentNode.LocalName}>"
 					: $"</{CurrentNode.Prefix}:{CurrentNode.LocalName}>";
 			}
-
 			return null;
 		}
 
