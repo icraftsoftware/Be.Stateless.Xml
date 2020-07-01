@@ -41,7 +41,7 @@ namespace Be.Stateless.Text.Extensions
 		{
 			if (builder == null) throw new ArgumentNullException(nameof(builder));
 			var xmlReader = builder.ToString().Trim()
-					.IfNotNullOrEmpty(s => XmlReader.Create(new StringReader(s), new XmlReaderSettings { CloseInput = true }))
+					.IfNotNullOrEmpty(s => XmlReader.Create(new StringReader(s), new XmlReaderSettings { CloseInput = true, XmlResolver = null }))
 				?? EmptyXmlReader.Create();
 			xmlReader.MoveToContent();
 			return xmlReader;

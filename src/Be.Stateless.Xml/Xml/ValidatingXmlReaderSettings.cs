@@ -192,7 +192,7 @@ namespace Be.Stateless.Xml
 		public static XmlReaderSettings Create(XmlSchemaContentProcessing contentProcessing, ValidationEventHandler validationEventHandler, params XmlSchema[] schemas)
 		{
 			if (validationEventHandler == null) throw new ArgumentNullException(nameof(validationEventHandler));
-			var readerSettings = new XmlReaderSettings();
+			var readerSettings = new XmlReaderSettings { XmlResolver = null };
 			if (contentProcessing != XmlSchemaContentProcessing.None)
 			{
 				schemas.ForEach(s => readerSettings.Schemas.Add(s));
