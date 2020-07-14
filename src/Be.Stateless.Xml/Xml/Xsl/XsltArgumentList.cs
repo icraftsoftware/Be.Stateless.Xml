@@ -30,6 +30,7 @@ namespace Be.Stateless.Xml.Xsl
 	/// </summary>
 	[SuppressMessage("Design", "CA1010:Collections should implement generic interface")]
 	[SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix")]
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	public class XsltArgumentList : System.Xml.Xsl.XsltArgumentList, ICloneable, IEnumerable
 	{
 		private static void Copy(System.Xml.Xsl.XsltArgumentList source, System.Xml.Xsl.XsltArgumentList target)
@@ -131,6 +132,7 @@ namespace Be.Stateless.Xml.Xsl
 
 		#endregion
 
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public XsltArgumentList Clone()
 		{
 			var target = new XsltArgumentList();
@@ -138,6 +140,7 @@ namespace Be.Stateless.Xml.Xsl
 			return target;
 		}
 
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public System.Xml.Xsl.XsltArgumentList Add(XsltArgument argument)
 		{
 			if (argument == null) throw new ArgumentNullException(nameof(argument));
@@ -155,6 +158,7 @@ namespace Be.Stateless.Xml.Xsl
 		/// <returns>
 		/// A new list being the result of the union.
 		/// </returns>
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public System.Xml.Xsl.XsltArgumentList Union(object[] splatteredArguments)
 		{
 			if (splatteredArguments == null) throw new ArgumentNullException(nameof(splatteredArguments));
@@ -181,6 +185,7 @@ namespace Be.Stateless.Xml.Xsl
 		/// <returns>
 		/// A new list being the result of the union.
 		/// </returns>
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public System.Xml.Xsl.XsltArgumentList Union(params XsltArgument[] arguments)
 		{
 			if (arguments == null) throw new ArgumentNullException(nameof(arguments));
@@ -197,6 +202,7 @@ namespace Be.Stateless.Xml.Xsl
 		/// <returns>
 		/// A new list being the result of the union.
 		/// </returns>
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public System.Xml.Xsl.XsltArgumentList Union(System.Xml.Xsl.XsltArgumentList arguments)
 		{
 			var union = Clone();

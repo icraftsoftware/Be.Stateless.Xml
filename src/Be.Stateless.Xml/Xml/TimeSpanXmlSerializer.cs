@@ -30,6 +30,7 @@ namespace Be.Stateless.Xml
 	/// XML serializer surrogate that supports the serialization of <see cref="TimeSpan"/>.
 	/// </summary>
 	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Required by XML serialization")]
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	public class TimeSpanXmlSerializer : IXmlSerializable
 	{
 		#region Operators

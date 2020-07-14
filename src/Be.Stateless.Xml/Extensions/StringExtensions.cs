@@ -17,11 +17,13 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace Be.Stateless.Extensions
 {
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	public static class StringExtensions
 	{
 		/// <summary>
@@ -35,6 +37,7 @@ namespace Be.Stateless.Extensions
 		/// <c>true</c> if it is a valid qualified name; <c>false</c> otherwise.
 		/// </returns>
 		/// <seealso href="http://www.w3.org/TR/2009/REC-xml-names-20091208/#ns-qualnames"/>
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public static bool IsQName(this string qName)
 		{
 			// could have used http://msdn.microsoft.com/en-us/library/system.xml.xmlconvert.verifyncname.aspx but it is not a
@@ -58,6 +61,8 @@ namespace Be.Stateless.Extensions
 		/// <c>true</c> if it is a valid qualified name; <c>false</c> otherwise.
 		/// </returns>
 		/// <seealso href="http://www.w3.org/TR/xml-names/#ns-qualnames">Qualified Names</seealso>
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
+		[SuppressMessage("ReSharper", "CommentTypo")]
 		public static bool TryParseQName(this string qName, out string prefix, out string localPart)
 		{
 			// http://www.w3.org/TR/xml-names/#NT-NCName
@@ -90,6 +95,7 @@ namespace Be.Stateless.Extensions
 		/// <returns>
 		/// The typed <see cref="XmlQualifiedName"/> equivalent of the <paramref name="qName"/>.
 		/// </returns>
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public static XmlQualifiedName ToQName(this string qName, IXmlNamespaceResolver namespaceResolver)
 		{
 			if (qName.IsNullOrEmpty()) throw new ArgumentNullException(nameof(qName));

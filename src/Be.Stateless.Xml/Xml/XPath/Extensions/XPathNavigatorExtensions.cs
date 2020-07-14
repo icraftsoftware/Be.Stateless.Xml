@@ -17,6 +17,7 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
@@ -25,6 +26,8 @@ using Be.Stateless.IO;
 
 namespace Be.Stateless.Xml.XPath.Extensions
 {
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 	public static class XPathNavigatorExtensions
 	{
 		public static Stream AsStream(this XPathNavigator navigator)

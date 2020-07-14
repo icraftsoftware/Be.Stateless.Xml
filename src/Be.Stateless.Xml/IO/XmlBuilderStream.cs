@@ -29,6 +29,7 @@ using ConservativeEnumerator = System.Collections.Generic.IEnumerator<Be.Statele
 
 namespace Be.Stateless.IO
 {
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	public class XmlBuilderStream : Stream
 	{
 		public XmlBuilderStream(IXmlElementBuilder node) : this(node, Encoding.UTF8) { }
@@ -103,8 +104,10 @@ namespace Be.Stateless.IO
 
 		#endregion
 
-		public Encoding Encoding { get; private set; }
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
+		public Encoding Encoding { get; }
 
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public bool EOF => _enumerators.Count == 0;
 
 		private ConservativeEnumerator CurrentEnumerator
@@ -121,16 +124,13 @@ namespace Be.Stateless.IO
 		{
 			if (CurrentEnumerator.MoveNext())
 			{
-				if (CurrentNode is IXmlAttributeBuilder)
+				switch (CurrentNode)
 				{
-					return CurrentNode.Prefix.IsNullOrEmpty()
-						? $" {CurrentNode.LocalName}=\"{CurrentNode.Value}\""
-						: $" {CurrentNode.Prefix}:{CurrentNode.LocalName}=\"{CurrentNode.Value}\"";
-				}
-
-				if (CurrentNode is IXmlElementBuilder)
-				{
-					if (CurrentNode.HasAttributes())
+					case IXmlAttributeBuilder _:
+						return CurrentNode.Prefix.IsNullOrEmpty()
+							? $" {CurrentNode.LocalName}=\"{CurrentNode.Value}\""
+							: $" {CurrentNode.Prefix}:{CurrentNode.LocalName}=\"{CurrentNode.Value}\"";
+					case IXmlElementBuilder _ when CurrentNode.HasAttributes():
 					{
 						var result = CurrentNode.Prefix.IsNullOrEmpty()
 							? $"<{CurrentNode.LocalName}"
@@ -138,8 +138,7 @@ namespace Be.Stateless.IO
 						_enumerators.AddLast(CurrentNode.GetAttributes().GetConservativeEnumerator());
 						return result;
 					}
-
-					if (CurrentNode.HasChildNodes())
+					case IXmlElementBuilder _ when CurrentNode.HasChildNodes():
 					{
 						var result = CurrentNode.Prefix.IsNullOrEmpty()
 							? $"<{CurrentNode.LocalName}>"
@@ -147,17 +146,15 @@ namespace Be.Stateless.IO
 						_enumerators.AddLast(CurrentNode.GetChildNodes().GetConservativeEnumerator());
 						return result;
 					}
-					return CurrentNode.Prefix.IsNullOrEmpty()
-						? $"<{CurrentNode.LocalName} />"
-						: $"<{CurrentNode.Prefix}:{CurrentNode.LocalName} />";
+					case IXmlElementBuilder _:
+						return CurrentNode.Prefix.IsNullOrEmpty()
+							? $"<{CurrentNode.LocalName} />"
+							: $"<{CurrentNode.Prefix}:{CurrentNode.LocalName} />";
+					case IXmlTextBuilder _:
+						return CurrentNode.Value;
+					default:
+						throw new NotImplementedException();
 				}
-
-				if (CurrentNode is IXmlTextBuilder)
-				{
-					return CurrentNode.Value;
-				}
-
-				throw new NotImplementedException();
 			}
 
 			if (CurrentNode is IXmlAttributeBuilder)

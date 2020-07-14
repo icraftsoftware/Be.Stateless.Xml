@@ -23,6 +23,8 @@ using System.Xml.Serialization;
 
 namespace Be.Stateless.Xml.Serialization
 {
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 	public static class XmlSerializerFactory
 	{
 		public static XmlSerializer Create(Type type, XmlRootAttribute root)

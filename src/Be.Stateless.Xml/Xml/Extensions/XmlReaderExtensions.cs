@@ -17,10 +17,13 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 
 namespace Be.Stateless.Xml.Extensions
 {
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 	public static class XmlReaderExtensions
 	{
 		/// <summary>
@@ -73,6 +76,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// <param name="name">
 		/// The string to match against the <see cref="XmlReader.Name"/> property of the element found.
 		/// </param>
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public static void AssertEndElement(this XmlReader reader, string name)
 		{
 			if (reader == null) throw new ArgumentNullException(nameof(reader));
@@ -95,6 +99,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// <param name="ns">
 		/// The string to match against the <see cref="XmlReader.NamespaceURI"/> property of the element found.
 		/// </param>
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public static void AssertEndElement(this XmlReader reader, string name, string ns)
 		{
 			if (reader == null) throw new ArgumentNullException(nameof(reader));
@@ -113,6 +118,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// <param name="name">
 		/// The string to match against the <see cref="XmlReader.Name"/> property of the element found.
 		/// </param>
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public static bool IsEndElement(this XmlReader reader, string name)
 		{
 			if (reader == null) throw new ArgumentNullException(nameof(reader));
@@ -133,6 +139,7 @@ namespace Be.Stateless.Xml.Extensions
 		/// <param name="ns">
 		/// The string to match against the <see cref="XmlReader.NamespaceURI"/> property of the element found.
 		/// </param>
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public static bool IsEndElement(this XmlReader reader, string name, string ns)
 		{
 			if (reader == null) throw new ArgumentNullException(nameof(reader));

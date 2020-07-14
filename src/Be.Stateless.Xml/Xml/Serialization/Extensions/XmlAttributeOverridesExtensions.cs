@@ -17,6 +17,7 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Xml.Serialization;
 
@@ -26,6 +27,8 @@ namespace Be.Stateless.Xml.Serialization.Extensions
 	/// <see cref="XmlAttributeOverrides"/>'s typed-extension methods.
 	/// </summary>
 	/// <seealso href="http://stackoverflow.com/questions/9377414/excluding-some-properties-during-serialization-without-changing-the-original-cla"/>
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 	public static class XmlAttributeOverridesExtensions
 	{
 		public static void Add<T>(this XmlAttributeOverrides overrides, XmlAttributes attributes)

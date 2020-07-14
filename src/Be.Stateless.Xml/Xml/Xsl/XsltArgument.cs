@@ -16,13 +16,17 @@
 
 #endregion
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace Be.Stateless.Xml.Xsl
 {
 	public class XsltArgument
 	{
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public XsltArgument(string name, object value) : this(name, string.Empty, value) { }
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1054:Uri parameters should not be strings")]
+		[SuppressMessage("Design", "CA1054:Uri parameters should not be strings")]
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public XsltArgument(string name, string namespaceUri, object value)
 		{
 			Name = name;
@@ -30,11 +34,11 @@ namespace Be.Stateless.Xml.Xsl
 			Value = value;
 		}
 
-		public string Name { get; private set; }
+		public string Name { get; }
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings")]
-		public string NamespaceUri { get; private set; }
+		[SuppressMessage("Design", "CA1056:Uri properties should not be strings")]
+		public string NamespaceUri { get; }
 
-		public object Value { get; private set; }
+		public object Value { get; }
 	}
 }

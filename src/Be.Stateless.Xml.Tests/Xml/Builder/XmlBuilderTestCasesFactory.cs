@@ -48,7 +48,7 @@ namespace Be.Stateless.Xml.Builder
 							Attributes = new[] {
 								new XmlAttributeBuilder { LocalName = "a1", Value = "one" },
 								new XmlAttributeBuilder { LocalName = "a2", Value = "two" }
-							},
+							}
 						}
 					}
 				},

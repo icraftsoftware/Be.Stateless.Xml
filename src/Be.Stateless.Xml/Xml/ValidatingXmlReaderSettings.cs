@@ -17,6 +17,7 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 using System.Xml.Schema;
 using Be.Stateless.Linq.Extensions;
@@ -146,6 +147,7 @@ namespace Be.Stateless.Xml
 		/// </para>
 		/// </remarks>
 		/// <seealso cref="XmlSchemaContentProcessing"/>
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public static XmlReaderSettings Create(XmlSchemaContentProcessing contentProcessing, params XmlSchema[] schemas)
 		{
 			return Create(
@@ -189,6 +191,7 @@ namespace Be.Stateless.Xml
 		/// </para>
 		/// </remarks>
 		/// <seealso cref="XmlSchemaContentProcessing"/>
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public static XmlReaderSettings Create(XmlSchemaContentProcessing contentProcessing, ValidationEventHandler validationEventHandler, params XmlSchema[] schemas)
 		{
 			if (validationEventHandler == null) throw new ArgumentNullException(nameof(validationEventHandler));

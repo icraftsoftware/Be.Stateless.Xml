@@ -17,6 +17,7 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -25,6 +26,7 @@ using Be.Stateless.Xml;
 
 namespace Be.Stateless.Text.Extensions
 {
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	public static class StringBuilderExtensions
 	{
 		/// <summary>
@@ -37,6 +39,7 @@ namespace Be.Stateless.Text.Extensions
 		/// <returns>
 		/// An <see cref="XmlReader"/> over the XML content of the <see cref="StringBuilder"/>.
 		/// </returns>
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public static XmlReader GetReaderAtContent(this StringBuilder builder)
 		{
 			if (builder == null) throw new ArgumentNullException(nameof(builder));

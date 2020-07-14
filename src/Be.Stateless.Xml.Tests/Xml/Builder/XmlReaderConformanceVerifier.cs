@@ -48,7 +48,7 @@ namespace Be.Stateless.Xml.Builder
 		{
 			get
 			{
-				_actual.BaseURI.Should().Be((_expected.BaseURI));
+				_actual.BaseURI.Should().Be(_expected.BaseURI);
 				return _actual.BaseURI;
 			}
 		}

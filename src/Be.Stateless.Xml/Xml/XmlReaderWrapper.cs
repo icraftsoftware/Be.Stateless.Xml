@@ -129,6 +129,6 @@ namespace Be.Stateless.Xml
 		#endregion
 
 		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-		protected XmlReader InnerReader { get; set; }
+		protected XmlReader InnerReader { get; }
 	}
 }

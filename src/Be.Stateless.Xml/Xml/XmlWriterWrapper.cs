@@ -156,6 +156,6 @@ namespace Be.Stateless.Xml
 		#endregion
 
 		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-		protected XmlWriter InnerWriter { get; set; }
+		protected XmlWriter InnerWriter { get; }
 	}
 }

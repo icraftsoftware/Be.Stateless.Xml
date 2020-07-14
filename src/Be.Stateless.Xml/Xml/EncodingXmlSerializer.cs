@@ -31,6 +31,7 @@ namespace Be.Stateless.Xml
 	/// XML serializer surrogate that supports the serialization of <see cref="Encoding"/>.
 	/// </summary>
 	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Required by XML serialization")]
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	public class EncodingXmlSerializer : IXmlSerializable
 	{
 		#region Operators

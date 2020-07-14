@@ -35,10 +35,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Be.Stateless.Common" Version="2.0.20113.37694" />
-    <PackageReference Include="Be.Stateless.Extensions" Version="2.0.20113.36957" />
-    <PackageReference Include="Be.Stateless.Stream" Version="2.0.20113.40064" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+    <PackageReference Include="Be.Stateless.Common" Version="2.0.20196.41234" />
+    <PackageReference Include="Be.Stateless.Extensions" Version="2.0.20196.40210" />
+    <PackageReference Include="Be.Stateless.Stream" Version="2.0.20196.42463" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

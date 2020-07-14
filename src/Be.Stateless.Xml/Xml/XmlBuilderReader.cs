@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml;
 using Be.Stateless.Extensions;
@@ -27,6 +28,7 @@ using ConservativeEnumerator = System.Collections.Generic.IEnumerator<Be.Statele
 
 namespace Be.Stateless.Xml
 {
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	public class XmlBuilderReader : XmlReader
 	{
 		public XmlBuilderReader(IXmlElementBuilder node)
@@ -570,7 +572,6 @@ namespace Be.Stateless.Xml
 					_nodeType = XmlNodeType.Element;
 					return true;
 				}
-
 				if (CurrentNode is IXmlTextBuilder)
 				{
 					if (!CurrentNode.Value.IsNullOrEmpty())

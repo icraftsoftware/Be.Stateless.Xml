@@ -17,12 +17,15 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 
 namespace Be.Stateless.Xml.Extensions
 {
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	public static class XmlWriterSettingsExtensions
 	{
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public static XmlWriterSettings Override(this XmlWriterSettings settings, Action<XmlWriterSettings> overrider)
 		{
 			if (settings == null) throw new ArgumentNullException(nameof(settings));
