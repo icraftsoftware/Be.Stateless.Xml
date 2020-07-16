@@ -128,7 +128,8 @@ namespace Be.Stateless.Xml
 
 		#endregion
 
-		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-		protected XmlReader InnerReader { get; }
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
+		[SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global", Justification = "Public API.")]
+		protected XmlReader InnerReader { get; set; }
 	}
 }
