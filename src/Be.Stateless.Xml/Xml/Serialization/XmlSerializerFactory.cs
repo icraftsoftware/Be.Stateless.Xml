@@ -38,6 +38,7 @@ namespace Be.Stateless.Xml.Serialization
 		}
 
 		[SuppressMessage("ReSharper", "InconsistentlySynchronizedField")]
+		[SuppressMessage("ReSharper", "InvertIf")]
 		private static XmlSerializer CachedCreate(Type type, Func<XmlSerializer> factory)
 		{
 			if (!_cache.TryGetValue(type, out var serializer))

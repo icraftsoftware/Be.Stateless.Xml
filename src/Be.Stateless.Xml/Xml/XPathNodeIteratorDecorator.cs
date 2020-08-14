@@ -26,7 +26,7 @@ namespace Be.Stateless.Xml
 	{
 		internal XPathNodeIteratorDecorator(XPathNodeIterator decoratedIterator, XPathNavigatorDecorator xPathNavigatorDecorator)
 		{
-			_decoratedIterator = decoratedIterator;
+			_decoratedIterator = decoratedIterator ?? throw new ArgumentNullException(nameof(decoratedIterator));
 			_xPathNavigatorDecorator = xPathNavigatorDecorator ?? throw new ArgumentNullException(nameof(xPathNavigatorDecorator));
 		}
 
@@ -37,7 +37,7 @@ namespace Be.Stateless.Xml
 			return new XPathNodeIteratorDecorator(_decoratedIterator.Clone(), _xPathNavigatorDecorator);
 		}
 
-		public override XPathNavigator Current => _xPathNavigatorDecorator.CreateXPathNavigatorDecorator(_decoratedIterator.Current);
+		public override XPathNavigator Current => _xPathNavigatorDecorator.DecorateXPathNavigator(_decoratedIterator.Current);
 
 		public override int CurrentPosition => _decoratedIterator.CurrentPosition;
 

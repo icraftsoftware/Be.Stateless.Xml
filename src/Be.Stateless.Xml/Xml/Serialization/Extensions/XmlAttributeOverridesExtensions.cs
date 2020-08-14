@@ -51,28 +51,34 @@ namespace Be.Stateless.Xml.Serialization.Extensions
 			overrides.Add(typeof(T), propertySelector.GetPropertyName(), _ignore);
 		}
 
+		[SuppressMessage("ReSharper", "SwitchStatementHandlesSomeKnownEnumValuesWithDefault")]
 		private static string GetPropertyName(this Expression propertySelector)
 		{
-			switch (propertySelector.NodeType)
+			while (true)
 			{
-				case ExpressionType.Lambda:
-					var lambdaExpression = (LambdaExpression) propertySelector;
-					return GetPropertyName(lambdaExpression.Body);
+				switch (propertySelector.NodeType)
+				{
+					case ExpressionType.Lambda:
+						var lambdaExpression = (LambdaExpression) propertySelector;
+						propertySelector = lambdaExpression.Body;
+						continue; // tail recursion
 
-				case ExpressionType.Convert:
-				case ExpressionType.Quote:
-					var unaryExpression = (UnaryExpression) propertySelector;
-					return GetPropertyName(unaryExpression.Operand);
+					case ExpressionType.Convert:
+					case ExpressionType.Quote:
+						var unaryExpression = (UnaryExpression) propertySelector;
+						propertySelector = unaryExpression.Operand;
+						continue; // tail recursion
 
-				case ExpressionType.MemberAccess:
-					var memberExpression = (MemberExpression) propertySelector;
-					var propertyInfo = memberExpression.Member;
-					if (memberExpression.Expression is ParameterExpression) return propertyInfo.Name;
-					// we've got a nested property (e.g. MyType.SomeProperty.SomeNestedProperty)
-					return GetPropertyName(memberExpression.Expression) + "." + propertyInfo.Name;
+					case ExpressionType.MemberAccess:
+						var memberExpression = (MemberExpression) propertySelector;
+						var propertyInfo = memberExpression.Member;
+						if (memberExpression.Expression is ParameterExpression) return propertyInfo.Name;
+						// we've got a nested property (e.g. MyType.SomeProperty.SomeNestedProperty)
+						return GetPropertyName(memberExpression.Expression) + "." + propertyInfo.Name;
 
-				default:
-					throw new ArgumentException($"Cannot translate expression because '{propertySelector}' is not a member expression.");
+					default:
+						throw new ArgumentException($"Cannot translate expression because '{propertySelector}' is not a member expression.");
+				}
 			}
 		}
 

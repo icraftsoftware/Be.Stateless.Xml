@@ -17,6 +17,7 @@
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 using FluentAssertions;
 
@@ -241,6 +242,7 @@ namespace Be.Stateless.Xml.Builder
 			_actual.ReadState.Should().Be(_expected.ReadState);
 		}
 
+		[SuppressMessage("ReSharper", "SwitchStatementHandlesSomeKnownEnumValuesWithDefault")]
 		private void AssertStateConformance()
 		{
 			_actual.EOF.Should().Be(_expected.EOF);

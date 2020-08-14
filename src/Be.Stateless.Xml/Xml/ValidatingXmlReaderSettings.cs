@@ -192,6 +192,7 @@ namespace Be.Stateless.Xml
 		/// </remarks>
 		/// <seealso cref="XmlSchemaContentProcessing"/>
 		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
+		[SuppressMessage("ReSharper", "InvertIf")]
 		public static XmlReaderSettings Create(XmlSchemaContentProcessing contentProcessing, ValidationEventHandler validationEventHandler, params XmlSchema[] schemas)
 		{
 			if (validationEventHandler == null) throw new ArgumentNullException(nameof(validationEventHandler));

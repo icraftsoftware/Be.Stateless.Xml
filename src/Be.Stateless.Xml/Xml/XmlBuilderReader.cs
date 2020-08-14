@@ -289,6 +289,7 @@ namespace Be.Stateless.Xml
 		/// of the following node types: <see cref="XmlNodeType.DocumentType"/>, <see cref="XmlNodeType.Element"/>, or <see
 		/// cref="XmlNodeType.XmlDeclaration"/>.
 		/// </remarks>
+		[SuppressMessage("ReSharper", "InvertIf")]
 		public override bool MoveToElement()
 		{
 			if (CurrentEnumerator is IEnumerator<IXmlAttributeBuilder>)
@@ -326,6 +327,7 @@ namespace Be.Stateless.Xml
 		/// cref="MoveToNextAttribute"/> returns <c>true</c>, the reader moves to the next attribute; otherwise, the position of
 		/// the reader does not change.
 		/// </remarks>
+		[SuppressMessage("ReSharper", "InvertIf")]
 		public override bool MoveToNextAttribute()
 		{
 			if (CurrentNode is IXmlTextBuilder && ParentNode is IXmlAttributeBuilder)
@@ -403,6 +405,7 @@ namespace Be.Stateless.Xml
 		/// When an <see cref="XmlReader"/> is first created and initialized, there is no information available. You must call
 		/// <see cref="Read"/> to read the first node.
 		/// </remarks>
+		[SuppressMessage("ReSharper", "SwitchStatementHandlesSomeKnownEnumValuesWithDefault")]
 		public override bool Read()
 		{
 			switch (_state)
@@ -549,6 +552,8 @@ namespace Be.Stateless.Xml
 			get { return ParentEnumerator.IfNotNull(e => e.Current); }
 		}
 
+		[SuppressMessage("ReSharper", "ConvertIfStatementToSwitchStatement")]
+		[SuppressMessage("ReSharper", "InvertIf")]
 		private bool ReadNextNode()
 		{
 			// attributes must not be taken into account while enumerating nodes

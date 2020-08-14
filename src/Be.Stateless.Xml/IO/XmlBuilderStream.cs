@@ -120,6 +120,7 @@ namespace Be.Stateless.IO
 			get { return CurrentEnumerator.IfNotNull(e => e.Current); }
 		}
 
+		[SuppressMessage("ReSharper", "InvertIf")]
 		private string ReadNextNode()
 		{
 			if (CurrentEnumerator.MoveNext())

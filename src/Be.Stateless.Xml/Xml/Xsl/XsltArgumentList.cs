@@ -86,6 +86,7 @@ namespace Be.Stateless.Xml.Xsl
 		/// The arguments to store in the list. The array must contain a number of items that is a multiple of 3. Each series of
 		/// 3 items contains, in that order, an XSL parameter name, the namespace URI of the parameter, and its value.
 		/// </param>
+		[SuppressMessage("ReSharper", "ArgumentsStyleOther")]
 		public XsltArgumentList(params object[] splatteredArguments)
 		{
 			if (splatteredArguments == null) throw new ArgumentNullException(nameof(splatteredArguments));
@@ -158,6 +159,7 @@ namespace Be.Stateless.Xml.Xsl
 		/// <returns>
 		/// A new list being the result of the union.
 		/// </returns>
+		[SuppressMessage("ReSharper", "ArgumentsStyleOther")]
 		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 		public System.Xml.Xsl.XsltArgumentList Union(object[] splatteredArguments)
 		{

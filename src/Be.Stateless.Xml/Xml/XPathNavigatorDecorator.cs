@@ -16,9 +16,11 @@
 
 #endregion
 
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 using System.Xml.XPath;
+using Be.Stateless.Extensions;
 
 namespace Be.Stateless.Xml
 {
@@ -26,7 +28,7 @@ namespace Be.Stateless.Xml
 	{
 		protected XPathNavigatorDecorator(XPathNavigator decoratedNavigator)
 		{
-			_decoratedNavigator = decoratedNavigator;
+			_decoratedNavigator = decoratedNavigator ?? throw new ArgumentNullException(nameof(decoratedNavigator));
 		}
 
 		#region Base Class Member Overrides
@@ -37,12 +39,12 @@ namespace Be.Stateless.Xml
 
 		public override XPathNavigator Clone()
 		{
-			return CreateXPathNavigatorDecorator(_decoratedNavigator.Clone());
+			return DecorateXPathNavigator(_decoratedNavigator.Clone());
 		}
 
 		public override XPathNavigator CreateNavigator()
 		{
-			return CreateXPathNavigatorDecorator(_decoratedNavigator.CreateNavigator());
+			return DecorateXPathNavigator(_decoratedNavigator.CreateNavigator());
 		}
 
 		public override object Evaluate(string xpath)
@@ -189,17 +191,17 @@ namespace Be.Stateless.Xml
 
 		public override XPathNavigator SelectSingleNode(string xpath)
 		{
-			return CreateXPathNavigatorDecorator(_decoratedNavigator.SelectSingleNode(xpath));
+			return DecorateXPathNavigator(_decoratedNavigator.SelectSingleNode(xpath));
 		}
 
 		public override XPathNavigator SelectSingleNode(string xpath, IXmlNamespaceResolver resolver)
 		{
-			return CreateXPathNavigatorDecorator(_decoratedNavigator.SelectSingleNode(xpath, resolver));
+			return DecorateXPathNavigator(_decoratedNavigator.SelectSingleNode(xpath, resolver));
 		}
 
 		public override XPathNavigator SelectSingleNode(XPathExpression expression)
 		{
-			return CreateXPathNavigatorDecorator(_decoratedNavigator.SelectSingleNode(expression));
+			return DecorateXPathNavigator(_decoratedNavigator.SelectSingleNode(expression));
 		}
 
 		#endregion
@@ -210,7 +212,12 @@ namespace Be.Stateless.Xml
 
 		#endregion
 
-		protected internal abstract XPathNavigator CreateXPathNavigatorDecorator(XPathNavigator decoratedNavigator);
+		internal XPathNavigator DecorateXPathNavigator(XPathNavigator navigator)
+		{
+			return navigator.IfNotNull(CreateXPathNavigatorDecorator);
+		}
+
+		protected abstract XPathNavigator CreateXPathNavigatorDecorator(XPathNavigator decoratedNavigator);
 
 		private readonly XPathNavigator _decoratedNavigator;
 	}
