@@ -21,7 +21,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 using FluentAssertions;
 
-namespace Be.Stateless.Xml.Builder
+namespace Be.Stateless.Dummies.Xml.Builder
 {
 	/// <summary>
 	/// Asserts that the actual <see cref="XmlReader"/>'s behavior is conforming to the expected <see cref="XmlReader"/> one.

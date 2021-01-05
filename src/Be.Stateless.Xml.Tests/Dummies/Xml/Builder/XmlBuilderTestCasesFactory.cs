@@ -18,8 +18,9 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Be.Stateless.Xml.Builder;
 
-namespace Be.Stateless.Xml.Builder
+namespace Be.Stateless.Dummies.Xml.Builder
 {
 	internal class XmlBuilderTestCasesFactory : IEnumerable<object[]>
 	{

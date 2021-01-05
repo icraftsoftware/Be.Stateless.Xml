@@ -27,7 +27,7 @@ using Be.Stateless.Xml;
 namespace Be.Stateless.Text.Extensions
 {
 	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
-	public static class StringBuilderExtensions
+	public static class StringBuilderXmlExtensions
 	{
 		/// <summary>
 		/// Returns an <see cref="XmlReader"/> over a <see cref="StringBuilder"/> that contains XML data. Provided that the

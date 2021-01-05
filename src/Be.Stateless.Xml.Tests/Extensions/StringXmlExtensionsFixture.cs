@@ -26,7 +26,7 @@ using Xunit;
 
 namespace Be.Stateless.Extensions
 {
-	public class StringExtensionsFixture
+	public class StringXmlExtensionsFixture
 	{
 		[Theory]
 		[InlineData("name0", true)]
@@ -67,7 +67,7 @@ namespace Be.Stateless.Extensions
 </xsl:stylesheet>";
 
 			var navigator = new XPathDocument(new StringReader(content)).CreateNavigator();
-			navigator.MoveToFollowing(XPathNodeType.Element);
+			navigator!.MoveToFollowing(XPathNodeType.Element);
 
 			"no-namespace".ToQName(navigator).Should().Be(new XmlQualifiedName("no-namespace", null));
 			"bts:OutboundTransportLocation".ToQName(navigator).Should()

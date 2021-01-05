@@ -22,6 +22,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
+using Be.Stateless.Dummies.Xml.Builder;
 using Be.Stateless.Extensions;
 using Be.Stateless.Resources;
 using Be.Stateless.Xml.Builder;
@@ -73,7 +74,7 @@ namespace Be.Stateless.Xml
 		public XmlBuilderReaderFixture()
 		{
 			IdentityTransform = new XslCompiledTransform(true);
-			using (var xmlReader = XmlReader.Create(ResourceManager.Load(Assembly.GetExecutingAssembly(), "Be.Stateless.Xml.Xsl.XsltIdentity.xslt")))
+			using (var xmlReader = XmlReader.Create(ResourceManager.Load(Assembly.GetExecutingAssembly(), "Be.Stateless.Resources.XsltIdentity.xslt")))
 			{
 				IdentityTransform.Load(xmlReader);
 			}
@@ -144,11 +145,9 @@ namespace Be.Stateless.Xml
 		{
 			Action act = () => {
 				using (var verifier = new XmlReaderConformanceVerifier(actual, expected))
+				using (var writer = XmlWriter.Create(new StringBuilder()))
 				{
-					using (var writer = XmlWriter.Create(new StringBuilder()))
-					{
-						IdentityTransform.Transform(verifier, writer);
-					}
+					IdentityTransform.Transform(verifier, writer);
 				}
 			};
 			act.Should().NotThrow();

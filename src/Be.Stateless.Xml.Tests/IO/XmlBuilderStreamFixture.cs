@@ -18,6 +18,7 @@
 
 using System;
 using System.IO;
+using Be.Stateless.Dummies.Xml.Builder;
 using Be.Stateless.Xml.Builder;
 using FluentAssertions;
 using Moq;

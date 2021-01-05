@@ -24,7 +24,7 @@ using System.Xml;
 namespace Be.Stateless.Extensions
 {
 	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
-	public static class StringExtensions
+	public static class StringXmlExtensions
 	{
 		/// <summary>
 		/// Verifies that the <paramref name="qName"/> string is a valid qualified name according to the W3C Extended Markup

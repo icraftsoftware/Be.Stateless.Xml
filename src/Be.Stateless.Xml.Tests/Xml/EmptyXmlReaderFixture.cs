@@ -28,7 +28,7 @@ namespace Be.Stateless.Xml
 		[Fact]
 		public void MoveToContent()
 		{
-			var expected = new XmlDocument().CreateNavigator().ReadSubtree();
+			var expected = new XmlDocument().CreateNavigator()!.ReadSubtree();
 			var sut = EmptyXmlReader.Create();
 
 			sut.ReadState.Should().Be(expected.ReadState);
@@ -39,7 +39,7 @@ namespace Be.Stateless.Xml
 		[Fact]
 		public void Read()
 		{
-			var expected = new XmlDocument().CreateNavigator().ReadSubtree();
+			var expected = new XmlDocument().CreateNavigator()!.ReadSubtree();
 			var sut = EmptyXmlReader.Create();
 
 			sut.ReadState.Should().Be(expected.ReadState);
@@ -50,7 +50,7 @@ namespace Be.Stateless.Xml
 		[Fact]
 		public void ReadStateEndOfFileBehavior()
 		{
-			var expected = new XmlDocument().CreateNavigator().ReadSubtree();
+			var expected = new XmlDocument().CreateNavigator()!.ReadSubtree();
 			var sut = EmptyXmlReader.Create();
 
 			sut.Read().Should().Be(expected.Read());
@@ -61,7 +61,7 @@ namespace Be.Stateless.Xml
 		[Fact]
 		public void ReadStateInitialBehavior()
 		{
-			var expected = new XmlDocument().CreateNavigator().ReadSubtree();
+			var expected = new XmlDocument().CreateNavigator()!.ReadSubtree();
 			var sut = EmptyXmlReader.Create();
 
 			ValidateExpectedBehavior(sut, expected);
@@ -70,7 +70,7 @@ namespace Be.Stateless.Xml
 		[Fact]
 		public void ReadToEnd()
 		{
-			var expected = new XmlDocument().CreateNavigator().ReadSubtree();
+			var expected = new XmlDocument().CreateNavigator()!.ReadSubtree();
 			var sut = EmptyXmlReader.Create();
 			using (expected)
 			using (sut)

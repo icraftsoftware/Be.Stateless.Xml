@@ -20,7 +20,7 @@ using System;
 using System.Text;
 using System.Xml;
 
-namespace Be.Stateless.Xml.Builder
+namespace Be.Stateless.Dummies.Xml.Builder
 {
 	/// <summary>
 	/// Spy that intercepts and records all the invocations of the <see cref="XmlReader"/>'s overridden abstract methods so as

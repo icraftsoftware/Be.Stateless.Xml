@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp3.0;net48</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1;net48</TargetFrameworks>
     <RootNamespace>Be.Stateless</RootNamespace>
     <AssemblyTitle>Be.Stateless.Xml</AssemblyTitle>
-    <Description>XML class library for general .NET development.</Description>
+    <Description>XML class library for general purpose .NET development.</Description>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -15,8 +15,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <ContinuousIntegrationBuild Condition="'$(TF_BUILD)' == 'true'">true</ContinuousIntegrationBuild>
-    <Deterministic>true</Deterministic>
     <GeneratePackageOnBuild Condition=" '$(GeneratePackageOnBuild)' == '' ">false</GeneratePackageOnBuild>
     <IsPackable>true</IsPackable>
     <PackageId>$(AssemblyTitle)</PackageId>
@@ -35,14 +33,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\.editorconfig" Link=".editorconfig" />
+    <None Include="..\..\.settings\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Be.Stateless.Common" Version="2.0.20224.34757" />
-    <PackageReference Include="Be.Stateless.Extensions" Version="2.0.20224.33378" />
-    <PackageReference Include="Be.Stateless.Stream" Version="2.0.20224.35297" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
+    <PackageReference Include="Be.Stateless.Common" Version="2.0.21005.39505" />
+    <PackageReference Include="Be.Stateless.Extensions" Version="2.0.21005.38790" />
+    <PackageReference Include="Be.Stateless.Stream" Version="2.0.21005.40362" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

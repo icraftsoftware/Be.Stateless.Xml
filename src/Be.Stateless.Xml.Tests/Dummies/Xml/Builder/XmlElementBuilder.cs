@@ -18,8 +18,9 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Be.Stateless.Xml.Builder;
 
-namespace Be.Stateless.Xml.Builder
+namespace Be.Stateless.Dummies.Xml.Builder
 {
 	[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 	public class XmlElementBuilder : IXmlElementBuilder

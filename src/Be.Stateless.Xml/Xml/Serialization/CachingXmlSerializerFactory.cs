@@ -23,10 +23,37 @@ using System.Xml.Serialization;
 
 namespace Be.Stateless.Xml.Serialization
 {
+	/// <summary>
+	/// Cache dynamically generated assemblies.
+	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// To increase performance, the XML serialization infrastructure dynamically generates assemblies to serialize and
+	/// deserialize specified types. The infrastructure finds and reuses those assemblies. This behavior occurs only when using
+	/// the following constructors:
+	/// <list type="bullet">
+	/// <item><see cref="XmlSerializer(Type)"/></item>
+	/// <item><see cref="XmlSerializer(Type,string)"/></item>
+	/// </list>
+	/// </para>
+	/// <para>
+	/// If you use any of the other constructors, multiple versions of the same assembly are generated and never unloaded, which
+	/// results in a memory leak and poor performance.
+	/// </para>
+	/// <para>
+	/// This class takes care of caching the dynamically generated assemblies should the serialization infrastructure not do it.
+	/// </para>
+	/// </remarks>
+	/// <seealso href="https://docs.microsoft.com/en-us/dotnet/api/system.xml.serialization.xmlserializer#dynamically-generated-assemblies">Dynamically Generated Assemblies</seealso>
 	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
 	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
-	public static class XmlSerializerFactory
+	public static class CachingXmlSerializerFactory
 	{
+		public static XmlSerializer Create(Type type)
+		{
+			return new XmlSerializer(type);
+		}
+
 		public static XmlSerializer Create(Type type, XmlRootAttribute root)
 		{
 			return CachedCreate(type, () => new XmlSerializer(type, root));
