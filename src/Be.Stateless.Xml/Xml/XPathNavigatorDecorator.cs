@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,12 +24,32 @@ using Be.Stateless.Extensions;
 
 namespace Be.Stateless.Xml
 {
-	public abstract class XPathNavigatorDecorator : XPathNavigator
+	public abstract class XPathNavigatorDecorator : XPathNavigator, IHasXmlNode
 	{
 		protected XPathNavigatorDecorator(XPathNavigator decoratedNavigator)
 		{
 			_decoratedNavigator = decoratedNavigator ?? throw new ArgumentNullException(nameof(decoratedNavigator));
 		}
+
+		#region IHasXmlNode Members
+
+		/// <summary>
+		/// Returns the <see cref="XmlNode"/> for the current position.
+		/// </summary>
+		/// <returns>
+		/// The <see cref="XmlNode"/> for the current position.
+		/// </returns>
+		/// <seealso cref="IHasXmlNode"/>
+		/// <seealso href="https://docs.microsoft.com/en-us/dotnet/api/system.xml.ihasxmlnode"/>
+		/// <seealso href="https://docs.microsoft.com/en-us/dotnet/api/system.xml.ihasxmlnode#remarks"/>
+		XmlNode IHasXmlNode.GetNode()
+		{
+			if (!(_decoratedNavigator is IHasXmlNode nodeProvider))
+				throw new NotSupportedException($"Decorated {nameof(XPathNavigator)} '{_decoratedNavigator.GetType().FullName}' does not implement {nameof(IHasXmlNode)}.");
+			return nodeProvider.GetNode();
+		}
+
+		#endregion
 
 		#region Base Class Member Overrides
 

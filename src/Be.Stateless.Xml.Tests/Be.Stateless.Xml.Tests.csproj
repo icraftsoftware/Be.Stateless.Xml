@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net48</TargetFrameworks>
     <RootNamespace>Be.Stateless</RootNamespace>
-    <AssemblyTitle>Be.Stateless.Xml.Tests</AssemblyTitle>
+    <AssemblyName>Be.Stateless.Xml.Tests</AssemblyName>
     <Description>Unit tests for XML class library for general purpose .NET development.</Description>
   </PropertyGroup>
 
