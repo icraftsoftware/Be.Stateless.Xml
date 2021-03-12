@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,11 +24,30 @@ using System.Xml;
 using Be.Stateless.Linq.Extensions;
 using FluentAssertions;
 using Xunit;
+using static FluentAssertions.FluentActions;
 
 namespace Be.Stateless.Xml.Xsl
 {
 	public class XsltArgumentListFixture
 	{
+		#region Setup/Teardown
+
+		public XsltArgumentListFixture()
+		{
+			_extensions = new Dictionary<string, object> {
+				{ "urn:extensions:one", new object() },
+				{ "urn:extensions:two", new object() },
+				{ "urn:extensions:ten", new object() }
+			};
+			_params = new Dictionary<XmlQualifiedName, object> {
+				{ new XmlQualifiedName("p1", "urn:parameters"), new object() },
+				{ new XmlQualifiedName("p2", "urn:parameters"), new object() },
+				{ new XmlQualifiedName("p3", "urn:parameters"), new object() }
+			};
+		}
+
+		#endregion
+
 		[Fact]
 		public void Clone()
 		{
@@ -92,14 +111,12 @@ namespace Be.Stateless.Xml.Xsl
 			var union1 = new System.Xml.Xsl.XsltArgumentList();
 			union1.AddExtensionObject(_extensions.First().Key, _extensions.First().Value);
 
-			Action act = () => arguments.Union(union1);
-			act.Should().Throw<ArgumentException>();
+			Invoking(() => arguments.Union(union1)).Should().Throw<ArgumentException>();
 
 			var union2 = new System.Xml.Xsl.XsltArgumentList();
 			union2.AddParam(_params.First().Key.Name, _params.First().Key.Namespace, _params.First().Value);
 
-			act = () => arguments.Union(union2);
-			act.Should().Throw<ArgumentException>();
+			Invoking(() => arguments.Union(union2)).Should().Throw<ArgumentException>();
 		}
 
 		[Fact]
@@ -131,20 +148,6 @@ namespace Be.Stateless.Xml.Xsl
 
 			union.Should().NotBeSameAs(lhs);
 			union.Should().NotBeSameAs(rhs);
-		}
-
-		public XsltArgumentListFixture()
-		{
-			_extensions = new Dictionary<string, object> {
-				{ "urn:extensions:one", new object() },
-				{ "urn:extensions:two", new object() },
-				{ "urn:extensions:ten", new object() }
-			};
-			_params = new Dictionary<XmlQualifiedName, object> {
-				{ new XmlQualifiedName("p1", "urn:parameters"), new object() },
-				{ new XmlQualifiedName("p2", "urn:parameters"), new object() },
-				{ new XmlQualifiedName("p3", "urn:parameters"), new object() }
-			};
 		}
 
 		private readonly Dictionary<string, object> _extensions;

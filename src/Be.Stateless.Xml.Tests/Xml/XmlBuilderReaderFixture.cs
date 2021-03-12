@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,11 +29,25 @@ using Be.Stateless.Xml.Builder;
 using FluentAssertions;
 using Moq;
 using Xunit;
+using static FluentAssertions.FluentActions;
 
 namespace Be.Stateless.Xml
 {
 	public class XmlBuilderReaderFixture
 	{
+		#region Setup/Teardown
+
+		public XmlBuilderReaderFixture()
+		{
+			IdentityTransform = new XslCompiledTransform(true);
+			using (var xmlReader = XmlReader.Create(ResourceManager.Load(Assembly.GetExecutingAssembly(), "Be.Stateless.Resources.XsltIdentity.xslt")))
+			{
+				IdentityTransform.Load(xmlReader);
+			}
+		}
+
+		#endregion
+
 		[Fact]
 		public void DisposeIXmlElementBuilder()
 		{
@@ -71,27 +85,18 @@ namespace Be.Stateless.Xml
 			AssertTransformInvocations(new XmlBuilderReader(builder), expected.IsNullOrEmpty() ? EmptyXmlReader.Create() : XmlReader.Create(new StringReader(expected)));
 		}
 
-		public XmlBuilderReaderFixture()
-		{
-			IdentityTransform = new XslCompiledTransform(true);
-			using (var xmlReader = XmlReader.Create(ResourceManager.Load(Assembly.GetExecutingAssembly(), "Be.Stateless.Resources.XsltIdentity.xslt")))
-			{
-				IdentityTransform.Load(xmlReader);
-			}
-		}
-
 		private XslCompiledTransform IdentityTransform { get; }
 
 		private void AssertOuterXmlConformance(XmlReader actual, XmlReader expected)
 		{
-			Action act = () => {
-				using (var verifier = new XmlReaderConformanceVerifier(actual, expected))
-				{
-					verifier.MoveToContent();
-					verifier.ReadOuterXml();
-				}
-			};
-			act.Should().NotThrow();
+			Invoking(
+				() => {
+					using (var verifier = new XmlReaderConformanceVerifier(actual, expected))
+					{
+						verifier.MoveToContent();
+						verifier.ReadOuterXml();
+					}
+				}).Should().NotThrow();
 		}
 
 		private void AssertOuterXmlContent(XmlReader actual, XmlReader expected)
@@ -123,34 +128,34 @@ namespace Be.Stateless.Xml
 
 		private void AssertReadConformance(XmlReader actual, XmlReader expected)
 		{
-			Action act = () => {
-				using (var verifier = new XmlReaderConformanceVerifier(expected, actual))
-				{
-					while (verifier.Read())
+			Invoking(
+				() => {
+					using (var verifier = new XmlReaderConformanceVerifier(expected, actual))
 					{
-						if (verifier.NodeType != XmlNodeType.Element) continue;
-						while (verifier.MoveToNextAttribute())
+						while (verifier.Read())
 						{
-							verifier.ReadAttributeValue();
-						}
+							if (verifier.NodeType != XmlNodeType.Element) continue;
+							while (verifier.MoveToNextAttribute())
+							{
+								verifier.ReadAttributeValue();
+							}
 
-						verifier.MoveToContent();
+							verifier.MoveToContent();
+						}
 					}
-				}
-			};
-			act.Should().NotThrow();
+				}).Should().NotThrow();
 		}
 
 		private void AssertTransformConformance(XmlReader actual, XmlReader expected)
 		{
-			Action act = () => {
-				using (var verifier = new XmlReaderConformanceVerifier(actual, expected))
-				using (var writer = XmlWriter.Create(new StringBuilder()))
-				{
-					IdentityTransform.Transform(verifier, writer);
-				}
-			};
-			act.Should().NotThrow();
+			Invoking(
+				() => {
+					using (var verifier = new XmlReaderConformanceVerifier(actual, expected))
+					using (var writer = XmlWriter.Create(new StringBuilder()))
+					{
+						IdentityTransform.Transform(verifier, writer);
+					}
+				}).Should().NotThrow();
 		}
 
 		private void AssertTransformResult(XmlReader actual, XmlReader expected)

@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ using System.Xml;
 using System.Xml.XPath;
 using FluentAssertions;
 using Xunit;
+using static FluentAssertions.FluentActions;
 
 namespace Be.Stateless.Extensions
 {
@@ -74,8 +75,8 @@ namespace Be.Stateless.Extensions
 				.Be(new XmlQualifiedName("OutboundTransportLocation", "http:=//schemas.microsoft.com/BizTalk/2003/system-properties"));
 			"tp:MessagingStepActivityID".ToQName(navigator).Should()
 				.Be(new XmlQualifiedName("MessagingStepActivityID", "urn:schemas.stateless.be:biztalk:properties:tracking:2012:04"));
-			Action act = () => ":MessagingStepActivityID".ToQName(navigator);
-			act.Should().Throw<ArgumentException>()
+			Invoking(() => ":MessagingStepActivityID".ToQName(navigator))
+				.Should().Throw<ArgumentException>()
 				.WithMessage("':MessagingStepActivityID' is not a valid XML qualified name.*")
 				.Where(e => e.ParamName == "qName");
 		}

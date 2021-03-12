@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ using System;
 using System.Xml;
 using FluentAssertions;
 using Xunit;
+using static FluentAssertions.FluentActions;
 
 namespace Be.Stateless.Xml
 {
@@ -101,27 +102,17 @@ namespace Be.Stateless.Xml
 			sut.Prefix.Should().Be(expected.Prefix);
 			sut.Value.Should().Be(expected.Value);
 
-			Action act = expected.Close;
-			act.Should().NotThrow();
-
-			act = sut.Close;
-			act.Should().NotThrow();
-
-			act = () => expected.GetAttribute(0);
-			act.Should().Throw<ArgumentOutOfRangeException>();
-
-			act = () => sut.GetAttribute(0);
-			act.Should().Throw<ArgumentOutOfRangeException>();
+			Invoking(expected.Close).Should().NotThrow();
+			Invoking(sut.Close).Should().NotThrow();
+			Invoking(() => expected.GetAttribute(0)).Should().Throw<ArgumentOutOfRangeException>();
+			Invoking(() => sut.GetAttribute(0)).Should().Throw<ArgumentOutOfRangeException>();
 
 			sut.GetAttribute("name").Should().Be(expected.GetAttribute("name"));
 			sut.GetAttribute("name", "ns").Should().Be(expected.GetAttribute("name", "ns"));
 			sut.LookupNamespace("ns").Should().Be(expected.LookupNamespace("ns"));
 
-			act = () => expected.MoveToAttribute(1);
-			act.Should().Throw<ArgumentOutOfRangeException>();
-
-			act = () => sut.MoveToAttribute(1);
-			act.Should().Throw<ArgumentOutOfRangeException>();
+			Invoking(() => expected.MoveToAttribute(1)).Should().Throw<ArgumentOutOfRangeException>();
+			Invoking(() => sut.MoveToAttribute(1)).Should().Throw<ArgumentOutOfRangeException>();
 
 			sut.MoveToAttribute("name").Should().Be(expected.MoveToAttribute("name"));
 			sut.MoveToAttribute("name", "ns").Should().Be(expected.MoveToAttribute("name", "ns"));
@@ -130,11 +121,8 @@ namespace Be.Stateless.Xml
 			sut.MoveToNextAttribute().Should().Be(expected.MoveToNextAttribute());
 			sut.ReadAttributeValue().Should().Be(expected.ReadAttributeValue());
 
-			act = expected.ResolveEntity;
-			act.Should().Throw<InvalidOperationException>();
-
-			act = sut.ResolveEntity;
-			act.Should().Throw<InvalidOperationException>();
+			Invoking(expected.ResolveEntity).Should().Throw<InvalidOperationException>();
+			Invoking(sut.ResolveEntity).Should().Throw<InvalidOperationException>();
 		}
 	}
 }

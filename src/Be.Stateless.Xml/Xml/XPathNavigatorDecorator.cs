@@ -44,9 +44,8 @@ namespace Be.Stateless.Xml
 		/// <seealso href="https://docs.microsoft.com/en-us/dotnet/api/system.xml.ihasxmlnode#remarks"/>
 		XmlNode IHasXmlNode.GetNode()
 		{
-			if (!(_decoratedNavigator is IHasXmlNode nodeProvider))
-				throw new NotSupportedException($"Decorated {nameof(XPathNavigator)} '{_decoratedNavigator.GetType().FullName}' does not implement {nameof(IHasXmlNode)}.");
-			return nodeProvider.GetNode();
+			if (_decoratedNavigator is IHasXmlNode nodeProvider) return nodeProvider.GetNode();
+			throw new NotSupportedException($"Decorated {nameof(XPathNavigator)} '{_decoratedNavigator.GetType().FullName}' does not implement {nameof(IHasXmlNode)}.");
 		}
 
 		#endregion
