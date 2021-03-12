@@ -16,27 +16,35 @@
 
 #endregion
 
+using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Xml;
 
-namespace Be.Stateless.Xml.Xsl
+namespace Be.Stateless.IO.Extensions
 {
-	public class XsltArgument
+	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	public static class XmlStreamExtensions
 	{
-		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
-		public XsltArgument(string name, object value) : this(name, string.Empty, value) { }
-
 		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
-		public XsltArgument(string name, string namespaceUri, object value)
+		public static XmlDocument AsXmlDocument(this Stream stream)
 		{
-			Name = name;
-			NamespaceUri = namespaceUri;
-			Value = value;
+			var document = new XmlDocument();
+			document.Load(stream ?? throw new ArgumentNullException(nameof(stream)));
+			return document;
 		}
 
-		public string Name { get; }
-
-		public string NamespaceUri { get; }
-
-		public object Value { get; }
+		[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
+		public static XmlDocument AsXmlDocument(this Stream stream, bool closeStream)
+		{
+			try
+			{
+				return stream.AsXmlDocument();
+			}
+			finally
+			{
+				if (closeStream) stream.Close();
+			}
+		}
 	}
 }

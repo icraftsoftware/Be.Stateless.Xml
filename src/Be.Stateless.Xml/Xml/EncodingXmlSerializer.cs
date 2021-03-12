@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,7 +36,6 @@ namespace Be.Stateless.Xml
 	{
 		#region Operators
 
-		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
 		public static implicit operator Encoding(EncodingXmlSerializer serializer)
 		{
 			return serializer == null || serializer._serializedEncoding.IsNullOrEmpty()
@@ -44,7 +43,6 @@ namespace Be.Stateless.Xml
 				: EncodingConverter.Deserialize(serializer._serializedEncoding);
 		}
 
-		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
 		public static implicit operator EncodingXmlSerializer(Encoding encoding)
 		{
 			return new EncodingXmlSerializer(encoding.IfNotNull(EncodingConverter.Serialize));

@@ -21,6 +21,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using FluentAssertions;
 using Xunit;
+using static FluentAssertions.FluentActions;
 
 namespace Be.Stateless.Text
 {
@@ -44,8 +45,8 @@ namespace Be.Stateless.Text
 		public void ConvertFromThrowsWhenEncodingIsUnknown()
 		{
 			var sut = new EncodingConverter();
-			Action act = () => sut.ConvertFrom("utf-48");
-			act.Should().Throw<ArgumentException>().WithMessage("'utf-48' is not a supported encoding name.*");
+			Invoking(() => sut.ConvertFrom("utf-48"))
+				.Should().Throw<ArgumentException>().WithMessage("'utf-48' is not a supported encoding name.*");
 		}
 
 		[Fact]
@@ -53,16 +54,16 @@ namespace Be.Stateless.Text
 		{
 			const string value = "utf-8, bam";
 			var sut = new EncodingConverter();
-			Action act = () => sut.ConvertFrom(value);
-			act.Should().Throw<NotSupportedException>().WithMessage($"'{value}' format is invalid and cannot be parsed into a {nameof(Encoding)}.");
+			Invoking(() => sut.ConvertFrom(value))
+				.Should().Throw<NotSupportedException>().WithMessage($"'{value}' format is invalid and cannot be parsed into a {nameof(Encoding)}.");
 		}
 
 		[Fact]
 		public void ConvertFromThrowsWhenNullOrEmptyString()
 		{
 			var sut = new EncodingConverter();
-			Action act = () => sut.ConvertFrom("");
-			act.Should().Throw<NotSupportedException>().WithMessage($"Cannot parse a null or empty string into a {nameof(Encoding)}.");
+			Invoking(() => sut.ConvertFrom(""))
+				.Should().Throw<NotSupportedException>().WithMessage($"Cannot parse a null or empty string into a {nameof(Encoding)}.");
 		}
 
 		[Fact]

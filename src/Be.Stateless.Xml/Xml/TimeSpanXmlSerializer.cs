@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,6 @@ namespace Be.Stateless.Xml
 	{
 		#region Operators
 
-		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
 		public static implicit operator TimeSpan(TimeSpanXmlSerializer serializer)
 		{
 			return serializer == null || serializer._serializedTimeSpan.IsNullOrEmpty()
@@ -43,7 +42,6 @@ namespace Be.Stateless.Xml
 				: TimeSpan.Parse(serializer._serializedTimeSpan, CultureInfo.InvariantCulture);
 		}
 
-		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
 		public static implicit operator TimeSpanXmlSerializer(TimeSpan timeSpan)
 		{
 			return new TimeSpanXmlSerializer(timeSpan.ToString());

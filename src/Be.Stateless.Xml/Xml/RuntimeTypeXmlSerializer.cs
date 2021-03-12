@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ namespace Be.Stateless.Xml
 	{
 		#region Operators
 
-		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
 		public static implicit operator Type(RuntimeTypeXmlSerializer serializer)
 		{
 			return serializer is null || serializer._serializedRuntimeType.IsNullOrEmpty()
@@ -42,7 +41,6 @@ namespace Be.Stateless.Xml
 				: Type.GetType(serializer._serializedRuntimeType, true);
 		}
 
-		[SuppressMessage("Usage", "CA2225:Operator overloads have named alternates")]
 		public static implicit operator RuntimeTypeXmlSerializer(Type type)
 		{
 			return new RuntimeTypeXmlSerializer(type.IfNotNull(t => t.AssemblyQualifiedName));

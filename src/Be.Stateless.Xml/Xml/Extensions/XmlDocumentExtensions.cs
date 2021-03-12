@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Schema;
 using Be.Stateless.IO;
+using Be.Stateless.Xml.XPath;
 
 namespace Be.Stateless.Xml.Extensions
 {
@@ -29,6 +30,11 @@ namespace Be.Stateless.Xml.Extensions
 	[SuppressMessage("ReSharper", "UnusedMember.Global", Justification = "Public API.")]
 	public static class XmlDocumentExtensions
 	{
+		public static NamespaceAffinitiveXPathNavigator CreateNamespaceAffinitiveXPathNavigator(this XmlDocument document)
+		{
+			return new NamespaceAffinitiveXPathNavigator(document.CreateNavigator(), document.GetNamespaceManager());
+		}
+
 		public static Stream AsStream(this XmlDocument document)
 		{
 			if (document == null) throw new ArgumentNullException(nameof(document));
@@ -37,6 +43,7 @@ namespace Be.Stateless.Xml.Extensions
 			return new StringStream(document.DocumentElement.OuterXml);
 		}
 
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global", Justification = "Public API.")]
 		public static XmlNamespaceManager GetNamespaceManager(this XmlDocument document)
 		{
 			if (document == null) throw new ArgumentNullException(nameof(document));

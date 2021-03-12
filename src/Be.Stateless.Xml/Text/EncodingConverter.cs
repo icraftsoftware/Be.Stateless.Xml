@@ -29,7 +29,7 @@ namespace Be.Stateless.Text
 	/// <summary>
 	/// Converts an <see cref="Encoding"/> back-and-forth to a <see cref="string"/>.
 	/// </summary>
-	[SuppressMessage("ReSharper", "UnusedType.Global", Justification = "Public API.")]
+	[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Public API.")]
 	public class EncodingConverter : ExpandableObjectConverter
 	{
 		/// <summary>

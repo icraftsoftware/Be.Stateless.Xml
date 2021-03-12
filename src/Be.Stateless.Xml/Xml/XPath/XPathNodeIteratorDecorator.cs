@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,9 +19,8 @@
 using System;
 using System.Xml.XPath;
 
-namespace Be.Stateless.Xml
+namespace Be.Stateless.Xml.XPath
 {
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1010:Generic interface should also be implemented")]
 	public class XPathNodeIteratorDecorator : XPathNodeIterator
 	{
 		internal XPathNodeIteratorDecorator(XPathNodeIterator decoratedIterator, XPathNavigatorDecorator xPathNavigatorDecorator)

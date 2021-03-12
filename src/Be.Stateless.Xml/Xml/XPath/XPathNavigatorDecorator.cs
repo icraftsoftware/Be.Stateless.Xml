@@ -22,7 +22,7 @@ using System.Xml;
 using System.Xml.XPath;
 using Be.Stateless.Extensions;
 
-namespace Be.Stateless.Xml
+namespace Be.Stateless.Xml.XPath
 {
 	public abstract class XPathNavigatorDecorator : XPathNavigator, IHasXmlNode
 	{
