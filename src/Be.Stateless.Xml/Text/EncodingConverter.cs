@@ -201,7 +201,7 @@ namespace Be.Stateless.Text
 		// ReSharper disable once MemberCanBePrivate.Global
 		internal const string ENCODING_SIGNATURE_MODIFIER = "with signature";
 
-		private static readonly Regex _regex = new Regex(
+		private static readonly Regex _regex = new(
 			$@"^(?<Name>\w[\w\-_]+?)(?<Preamble>(?i:\s{ENCODING_SIGNATURE_MODIFIER}))?$",
 			RegexOptions.Singleline | RegexOptions.Compiled);
 	}

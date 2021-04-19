@@ -44,7 +44,7 @@ namespace Be.Stateless.Xml
 
 		public static implicit operator TimeSpanXmlSerializer(TimeSpan timeSpan)
 		{
-			return new TimeSpanXmlSerializer(timeSpan.ToString());
+			return new(timeSpan.ToString());
 		}
 
 		#endregion

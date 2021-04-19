@@ -43,7 +43,7 @@ namespace Be.Stateless.Xml
 
 		public static implicit operator RuntimeTypeXmlSerializer(Type type)
 		{
-			return new RuntimeTypeXmlSerializer(type.IfNotNull(t => t.AssemblyQualifiedName));
+			return new(type.IfNotNull(t => t.AssemblyQualifiedName));
 		}
 
 		#endregion
