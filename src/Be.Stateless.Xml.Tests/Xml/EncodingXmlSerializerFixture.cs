@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ namespace Be.Stateless.Xml
 		public void SerializeEncoding()
 		{
 			var builder = new StringBuilder();
-			using (var writer = XmlWriter.Create(builder, new XmlWriterSettings { OmitXmlDeclaration = true }))
+			using (var writer = XmlWriter.Create(builder, new() { OmitXmlDeclaration = true }))
 			{
 				var sut = (EncodingXmlSerializer) new UTF8Encoding(true);
 				var serializer = new XmlSerializer(typeof(EncodingXmlSerializer));
@@ -64,7 +64,7 @@ namespace Be.Stateless.Xml
 		public void SerializeNullEncoding()
 		{
 			var builder = new StringBuilder();
-			using (var writer = XmlWriter.Create(builder, new XmlWriterSettings { OmitXmlDeclaration = true }))
+			using (var writer = XmlWriter.Create(builder, new() { OmitXmlDeclaration = true }))
 			{
 				var sut = (EncodingXmlSerializer) (Encoding) null;
 				var serializer = new XmlSerializer(typeof(EncodingXmlSerializer));

@@ -16,6 +16,7 @@
 
 #endregion
 
+using System.Linq;
 using System.Xml;
 using Be.Stateless.Xml.Extensions;
 using FluentAssertions;
@@ -76,7 +77,7 @@ namespace Be.Stateless.Xml.XPath
 			navigator.NamespaceManager.AddNamespace("s", "urn");
 
 			var iterator = navigator.SelectSingleNode("s:root");
-			iterator!.Select("s:six").Should().BeEmpty();
+			iterator!.Select("s:six").Cast<object>().Should().BeEmpty();
 		}
 
 		private const string CONTENT = "<root xmlns='urn'><one><two>2</two></one></root>";

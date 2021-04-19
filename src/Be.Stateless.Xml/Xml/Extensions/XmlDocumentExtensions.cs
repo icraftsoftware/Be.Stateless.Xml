@@ -32,7 +32,7 @@ namespace Be.Stateless.Xml.Extensions
 	{
 		public static NamespaceAffinitiveXPathNavigator CreateNamespaceAffinitiveXPathNavigator(this XmlDocument document)
 		{
-			return new NamespaceAffinitiveXPathNavigator(document.CreateNavigator(), document.GetNamespaceManager());
+			return new(document.CreateNavigator(), document.GetNamespaceManager());
 		}
 
 		public static Stream AsStream(this XmlDocument document)

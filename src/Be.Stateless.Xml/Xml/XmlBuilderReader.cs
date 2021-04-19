@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,11 +38,11 @@ namespace Be.Stateless.Xml
 			var enumerable = node == null
 				? Enumerable.Empty<IXmlElementBuilder>()
 				: Enumerable.Repeat(node, 1);
-			_enumerators = new LinkedList<ConservativeEnumerator>();
+			_enumerators = new();
 			_enumerators.AddLast(enumerable.GetConservativeEnumerator());
 			_nodeType = XmlNodeType.None;
 			_table = new NameTable();
-			_namespaceManager = new XmlNamespaceManager(_table);
+			_namespaceManager = new(_table);
 		}
 
 		#region Base Class Member Overrides

@@ -39,7 +39,7 @@ namespace Be.Stateless.Xml
 
 		public XmlBuilderReaderFixture()
 		{
-			IdentityTransform = new XslCompiledTransform(true);
+			IdentityTransform = new(true);
 			using (var xmlReader = XmlReader.Create(ResourceManager.Load(Assembly.GetExecutingAssembly(), "Be.Stateless.Resources.XsltIdentity.xslt")))
 			{
 				IdentityTransform.Load(xmlReader);

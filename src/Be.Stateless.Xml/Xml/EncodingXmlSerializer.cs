@@ -45,7 +45,7 @@ namespace Be.Stateless.Xml
 
 		public static implicit operator EncodingXmlSerializer(Encoding encoding)
 		{
-			return new EncodingXmlSerializer(encoding.IfNotNull(EncodingConverter.Serialize));
+			return new(encoding.IfNotNull(EncodingConverter.Serialize));
 		}
 
 		#endregion

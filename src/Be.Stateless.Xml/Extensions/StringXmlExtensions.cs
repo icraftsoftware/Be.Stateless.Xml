@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -103,7 +103,7 @@ namespace Be.Stateless.Extensions
 			var success = TryParseQName(qName, out var prefix, out var localPart);
 			if (!success) throw new ArgumentException($"'{qName}' is not a valid XML qualified name.", nameof(qName));
 			var ns = namespaceResolver.LookupNamespace(prefix);
-			return new XmlQualifiedName(localPart, ns);
+			return new(localPart, ns);
 		}
 	}
 }

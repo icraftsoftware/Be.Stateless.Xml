@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ namespace Be.Stateless.Xml
 		public void SerializeTimeSpan()
 		{
 			var builder = new StringBuilder();
-			using (var writer = XmlWriter.Create(builder, new XmlWriterSettings { OmitXmlDeclaration = true }))
+			using (var writer = XmlWriter.Create(builder, new() { OmitXmlDeclaration = true }))
 			{
 				var sut = (TimeSpanXmlSerializer) TimeSpan.FromMinutes(2);
 				var serializer = new XmlSerializer(typeof(TimeSpanXmlSerializer));
@@ -65,7 +65,7 @@ namespace Be.Stateless.Xml
 		public void SerializeZeroTimeSpan()
 		{
 			var builder = new StringBuilder();
-			using (var writer = XmlWriter.Create(builder, new XmlWriterSettings { OmitXmlDeclaration = true }))
+			using (var writer = XmlWriter.Create(builder, new() { OmitXmlDeclaration = true }))
 			{
 				var sut = (TimeSpanXmlSerializer) TimeSpan.Zero;
 				var serializer = new XmlSerializer(typeof(TimeSpanXmlSerializer));

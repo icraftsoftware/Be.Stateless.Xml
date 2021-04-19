@@ -50,6 +50,6 @@ namespace Be.Stateless.Xml.Serialization.Extensions
 		}
 
 		// http://stackoverflow.com/questions/625927/omitting-all-xsi-and-xsd-namespaces-when-serializing-an-object-in-net
-		private static readonly XmlSerializerNamespaces _omitXsdAndXsiXmlns = new XmlSerializerNamespaces(new[] { new XmlQualifiedName(string.Empty, string.Empty) });
+		private static readonly XmlSerializerNamespaces _omitXsdAndXsiXmlns = new(new[] { new XmlQualifiedName(string.Empty, string.Empty) });
 	}
 }

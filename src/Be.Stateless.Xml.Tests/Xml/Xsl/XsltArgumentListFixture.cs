@@ -34,15 +34,15 @@ namespace Be.Stateless.Xml.Xsl
 
 		public XsltArgumentListFixture()
 		{
-			_extensions = new Dictionary<string, object> {
-				{ "urn:extensions:one", new object() },
-				{ "urn:extensions:two", new object() },
-				{ "urn:extensions:ten", new object() }
+			_extensions = new() {
+				{ "urn:extensions:one", new() },
+				{ "urn:extensions:two", new() },
+				{ "urn:extensions:ten", new() }
 			};
-			_params = new Dictionary<XmlQualifiedName, object> {
-				{ new XmlQualifiedName("p1", "urn:parameters"), new object() },
-				{ new XmlQualifiedName("p2", "urn:parameters"), new object() },
-				{ new XmlQualifiedName("p3", "urn:parameters"), new object() }
+			_params = new() {
+				{ new("p1", "urn:parameters"), new() },
+				{ new("p2", "urn:parameters"), new() },
+				{ new("p3", "urn:parameters"), new() }
 			};
 		}
 
@@ -87,8 +87,8 @@ namespace Be.Stateless.Xml.Xsl
 			_extensions.ForEach(e => arguments.AddExtensionObject(e.Key, e.Value));
 			_params.ForEach(p => arguments.AddParam(p.Key.Name, p.Key.Namespace, p.Value));
 
-			_extensions.Add("urn:extensions:six", new object());
-			_params.Add(new XmlQualifiedName("p4", "urn:parameters"), new object());
+			_extensions.Add("urn:extensions:six", new());
+			_params.Add(new("p4", "urn:parameters"), new());
 
 			var newArguments = new System.Xml.Xsl.XsltArgumentList();
 			newArguments.AddExtensionObject(_extensions.Last().Key, _extensions.Last().Value);
@@ -123,8 +123,8 @@ namespace Be.Stateless.Xml.Xsl
 		public void UnionWithNull()
 		{
 			var lhs = new XsltArgumentList();
-			lhs.AddExtensionObject("urn:extensions:one", new object());
-			lhs.AddParam("p1", "urn:parameters", new object());
+			lhs.AddExtensionObject("urn:extensions:one", new());
+			lhs.AddParam("p1", "urn:parameters", new());
 
 			var union = lhs.Union((System.Xml.Xsl.XsltArgumentList) null);
 
@@ -137,12 +137,12 @@ namespace Be.Stateless.Xml.Xsl
 		public void UnionYieldsNewInstance()
 		{
 			var lhs = new XsltArgumentList();
-			lhs.AddExtensionObject("urn:extensions:one", new object());
-			lhs.AddParam("p1", "urn:parameters", new object());
+			lhs.AddExtensionObject("urn:extensions:one", new());
+			lhs.AddParam("p1", "urn:parameters", new());
 
 			var rhs = new XsltArgumentList();
-			rhs.AddExtensionObject("urn:extensions:two", new object());
-			rhs.AddParam("p2", "urn:parameters", new object());
+			rhs.AddExtensionObject("urn:extensions:two", new());
+			rhs.AddParam("p2", "urn:parameters", new());
 
 			var union = lhs.Union(rhs);
 

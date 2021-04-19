@@ -43,7 +43,7 @@ namespace Be.Stateless.IO
 			var enumerable = node == null
 				? Enumerable.Empty<IXmlElementBuilder>()
 				: Enumerable.Repeat(node, 1);
-			_enumerators = new LinkedList<ConservativeEnumerator>();
+			_enumerators = new();
 			_enumerators.AddLast(enumerable.GetConservativeEnumerator());
 		}
 
@@ -128,11 +128,11 @@ namespace Be.Stateless.IO
 			{
 				switch (CurrentNode)
 				{
-					case IXmlAttributeBuilder _:
+					case IXmlAttributeBuilder:
 						return CurrentNode.Prefix.IsNullOrEmpty()
 							? $" {CurrentNode.LocalName}=\"{CurrentNode.Value}\""
 							: $" {CurrentNode.Prefix}:{CurrentNode.LocalName}=\"{CurrentNode.Value}\"";
-					case IXmlElementBuilder _ when CurrentNode.HasAttributes():
+					case IXmlElementBuilder when CurrentNode.HasAttributes():
 					{
 						var result = CurrentNode.Prefix.IsNullOrEmpty()
 							? $"<{CurrentNode.LocalName}"
@@ -140,7 +140,7 @@ namespace Be.Stateless.IO
 						_enumerators.AddLast(CurrentNode.GetAttributes().GetConservativeEnumerator());
 						return result;
 					}
-					case IXmlElementBuilder _ when CurrentNode.HasChildNodes():
+					case IXmlElementBuilder when CurrentNode.HasChildNodes():
 					{
 						var result = CurrentNode.Prefix.IsNullOrEmpty()
 							? $"<{CurrentNode.LocalName}>"
@@ -148,11 +148,11 @@ namespace Be.Stateless.IO
 						_enumerators.AddLast(CurrentNode.GetChildNodes().GetConservativeEnumerator());
 						return result;
 					}
-					case IXmlElementBuilder _:
+					case IXmlElementBuilder:
 						return CurrentNode.Prefix.IsNullOrEmpty()
 							? $"<{CurrentNode.LocalName} />"
 							: $"<{CurrentNode.Prefix}:{CurrentNode.LocalName} />";
-					case IXmlTextBuilder _:
+					case IXmlTextBuilder:
 						return CurrentNode.Value;
 					default:
 						throw new NotImplementedException();

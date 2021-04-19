@@ -1,6 +1,6 @@
 ﻿#region Copyright & License
 
-// Copyright © 2012 - 2020 François Chabot
+// Copyright © 2012 - 2021 François Chabot
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ namespace Be.Stateless.Text.Extensions
 		{
 			if (builder == null) throw new ArgumentNullException(nameof(builder));
 			var xmlReader = builder.ToString().Trim()
-					.IfNotNullOrEmpty(s => XmlReader.Create(new StringReader(s), new XmlReaderSettings { CloseInput = true, XmlResolver = null }))
+					.IfNotNullOrEmpty(s => XmlReader.Create(new StringReader(s), new() { CloseInput = true, XmlResolver = null }))
 				?? EmptyXmlReader.Create();
 			xmlReader.MoveToContent();
 			return xmlReader;
